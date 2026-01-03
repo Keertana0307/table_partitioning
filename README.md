@@ -26,6 +26,3 @@ The following composite approaches are implemented:
 
 ## Project Structure
 Each partitioning method is implemented as a separate module with supporting sub-components to ensure clarity, modularity, and ease of execution.
-
-```bash
-python main.py
