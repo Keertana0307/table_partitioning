@@ -116,6 +116,9 @@ SET @total_access_time = @total_access_time + (@end - @start);
 
 -- Query execution time
 
+-- Scalability
+
+-- Throughput
 
 
 -- Non-partition
