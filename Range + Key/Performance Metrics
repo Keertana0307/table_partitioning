@@ -1,0 +1,661 @@
+Access/Response time
+(time returned for a single row)
+
+-- Partitioned
+-- Initialize total time
+SET @total_time = 0;
+
+-- Run 1
+SET @start = UNIX_TIMESTAMP(NOW(6));
+SELECT * FROM sales_range_key_partitioned
+WHERE region='Europe' AND order_date='2023-01-01' LIMIT 1;
+SET @end = UNIX_TIMESTAMP(NOW(6));
+SET @total_time = @total_time + (@end - @start);
+
+-- Run 2
+SET @start = UNIX_TIMESTAMP(NOW(6));
+SELECT * FROM sales_range_key_partitioned
+WHERE region='Europe' AND order_date='2023-01-01' LIMIT 1;
+SET @end = UNIX_TIMESTAMP(NOW(6));
+SET @total_time = @total_time + (@end - @start);
+
+-- Run 3
+SET @start = UNIX_TIMESTAMP(NOW(6));
+SELECT * FROM sales_range_key_partitioned
+WHERE region='Europe' AND order_date='2023-01-01' LIMIT 1;
+SET @end = UNIX_TIMESTAMP(NOW(6));
+SET @total_time = @total_time + (@end - @start);
+
+-- Run 4
+SET @start = UNIX_TIMESTAMP(NOW(6));
+SELECT * FROM sales_range_key_partitioned
+WHERE region='Europe' AND order_date='2023-01-01' LIMIT 1;
+SET @end = UNIX_TIMESTAMP(NOW(6));
+SET @total_time = @total_time + (@end - @start);
+
+-- Run 5
+SET @start = UNIX_TIMESTAMP(NOW(6));
+SELECT * FROM sales_range_key_partitioned
+WHERE region='Europe' AND order_date='2023-01-01' LIMIT 1;
+SET @end = UNIX_TIMESTAMP(NOW(6));
+SET @total_time = @total_time + (@end - @start);
+
+-- Run 6
+SET @start = UNIX_TIMESTAMP(NOW(6));
+SELECT * FROM sales_range_key_partitioned
+WHERE region='Europe' AND order_date='2023-01-01' LIMIT 1;
+SET @end = UNIX_TIMESTAMP(NOW(6));
+SET @total_time = @total_time + (@end - @start);
+
+-- Run 7
+SET @start = UNIX_TIMESTAMP(NOW(6));
+SELECT * FROM sales_range_key_partitioned
+WHERE region='Europe' AND order_date='2023-01-01' LIMIT 1;
+SET @end = UNIX_TIMESTAMP(NOW(6));
+SET @total_time = @total_time + (@end - @start);
+
+-- Run 8
+SET @start = UNIX_TIMESTAMP(NOW(6));
+SELECT * FROM sales_range_key_partitioned
+WHERE region='Europe' AND order_date='2023-01-01' LIMIT 1;
+SET @end = UNIX_TIMESTAMP(NOW(6));
+SET @total_time = @total_time + (@end - @start);
+
+-- Run 9
+SET @start = UNIX_TIMESTAMP(NOW(6));
+SELECT * FROM sales_range_key_partitioned
+WHERE region='Europe' AND order_date='2023-01-01' LIMIT 1;
+SET @end = UNIX_TIMESTAMP(NOW(6));
+SET @total_time = @total_time + (@end - @start);
+
+-- Run 10
+SET @start = UNIX_TIMESTAMP(NOW(6));
+SELECT * FROM sales_range_key_partitioned
+WHERE region='Europe' AND order_date='2023-01-01' LIMIT 1;
+SET @end = UNIX_TIMESTAMP(NOW(6));
+SET @total_time = @total_time + (@end - @start);
+
+-- Calculate average
+SELECT @total_time / 10 AS avg_access_time_seconds;
+
+-- Non-partitioned
+-- Initialize total time
+SET @total_time = 0;
+
+-- Run 1
+SET @start = UNIX_TIMESTAMP(NOW(6));
+SELECT * FROM sales_database.sales
+WHERE region='Europe' AND order_date='2023-01-01' LIMIT 1;
+SET @end = UNIX_TIMESTAMP(NOW(6));
+SET @total_time = @total_time + (@end - @start);
+
+-- Run 2
+SET @start = UNIX_TIMESTAMP(NOW(6));
+SELECT * FROM sales_database.sales
+WHERE region='Europe' AND order_date='2023-01-01' LIMIT 1;
+SET @end = UNIX_TIMESTAMP(NOW(6));
+SET @total_time = @total_time + (@end - @start);
+
+-- Run 3
+SET @start = UNIX_TIMESTAMP(NOW(6));
+SELECT * FROM sales_database.sales
+WHERE region='Europe' AND order_date='2023-01-01' LIMIT 1;
+SET @end = UNIX_TIMESTAMP(NOW(6));
+SET @total_time = @total_time + (@end - @start);
+
+-- Run 4
+SET @start = UNIX_TIMESTAMP(NOW(6));
+SELECT * FROM sales_database.sales
+WHERE region='Europe' AND order_date='2023-01-01' LIMIT 1;
+SET @end = UNIX_TIMESTAMP(NOW(6));
+SET @total_time = @total_time + (@end - @start);
+
+-- Run 5
+SET @start = UNIX_TIMESTAMP(NOW(6));
+SELECT * FROM sales_database.sales
+WHERE region='Europe' AND order_date='2023-01-01' LIMIT 1;
+SET @end = UNIX_TIMESTAMP(NOW(6));
+SET @total_time = @total_time + (@end - @start);
+
+-- Run 6
+SET @start = UNIX_TIMESTAMP(NOW(6));
+SELECT * FROM sales_database.sales
+WHERE region='Europe' AND order_date='2023-01-01' LIMIT 1;
+SET @end = UNIX_TIMESTAMP(NOW(6));
+SET @total_time = @total_time + (@end - @start);
+
+-- Run 7
+SET @start = UNIX_TIMESTAMP(NOW(6));
+SELECT * FROM sales_database.sales
+WHERE region='Europe' AND order_date='2023-01-01' LIMIT 1;
+SET @end = UNIX_TIMESTAMP(NOW(6));
+SET @total_time = @total_time + (@end - @start);
+
+-- Run 8
+SET @start = UNIX_TIMESTAMP(NOW(6));
+SELECT * FROM sales_database.sales
+WHERE region='Europe' AND order_date='2023-01-01' LIMIT 1;
+SET @end = UNIX_TIMESTAMP(NOW(6));
+SET @total_time = @total_time + (@end - @start);
+
+-- Run 9
+SET @start = UNIX_TIMESTAMP(NOW(6));
+SELECT * FROM sales_database.sales
+WHERE region='Europe' AND order_date='2023-01-01' LIMIT 1;
+SET @end = UNIX_TIMESTAMP(NOW(6));
+SET @total_time = @total_time + (@end - @start);
+
+-- Run 10
+SET @start = UNIX_TIMESTAMP(NOW(6));
+SELECT * FROM sales_database.sales
+WHERE region='Europe' AND order_date='2023-01-01' LIMIT 1;
+SET @end = UNIX_TIMESTAMP(NOW(6));
+SET @total_time = @total_time + (@end - @start);
+
+-- Calculate average
+SELECT @total_time / 10 AS avg_access_time_seconds;
+
+
+
+Partition
+Non-partition
+0.026029200000000000000000000000
+0.019082400000000000000000000000
+
+
+
+Query Execution Time
+-- Partitioned
+-- Initialize total time
+SET @total_time = 0;
+
+-- Run 1
+SET @start = UNIX_TIMESTAMP(NOW(6));
+SELECT * FROM sales_range_key_partitioned
+WHERE region='Europe' AND order_date='2023-01-01';
+SET @end = UNIX_TIMESTAMP(NOW(6));
+SET @total_time = @total_time + (@end - @start);
+
+-- Run 2
+SET @start = UNIX_TIMESTAMP(NOW(6));
+SELECT * FROM sales_range_key_partitioned
+WHERE region='Europe' AND order_date='2023-01-01';
+SET @end = UNIX_TIMESTAMP(NOW(6));
+SET @total_time = @total_time + (@end - @start);
+
+-- Run 3
+SET @start = UNIX_TIMESTAMP(NOW(6));
+SELECT * FROM sales_range_key_partitioned
+WHERE region='Europe' AND order_date='2023-01-01';
+SET @end = UNIX_TIMESTAMP(NOW(6));
+SET @total_time = @total_time + (@end - @start);
+
+-- Run 4
+SET @start = UNIX_TIMESTAMP(NOW(6));
+SELECT * FROM sales_range_key_partitioned
+WHERE region='Europe' AND order_date='2023-01-01';
+SET @end = UNIX_TIMESTAMP(NOW(6));
+SET @total_time = @total_time + (@end - @start);
+
+-- Run 5
+SET @start = UNIX_TIMESTAMP(NOW(6));
+SELECT * FROM sales_range_key_partitioned
+WHERE region='Europe' AND order_date='2023-01-01';
+SET @end = UNIX_TIMESTAMP(NOW(6));
+SET @total_time = @total_time + (@end - @start);
+
+-- Run 6
+SET @start = UNIX_TIMESTAMP(NOW(6));
+SELECT * FROM sales_range_key_partitioned
+WHERE region='Europe' AND order_date='2023-01-01';
+SET @end = UNIX_TIMESTAMP(NOW(6));
+SET @total_time = @total_time + (@end - @start);
+
+-- Run 7
+SET @start = UNIX_TIMESTAMP(NOW(6));
+SELECT * FROM sales_range_key_partitioned
+WHERE region='Europe' AND order_date='2023-01-01';
+SET @end = UNIX_TIMESTAMP(NOW(6));
+SET @total_time = @total_time + (@end - @start);
+
+-- Run 8
+SET @start = UNIX_TIMESTAMP(NOW(6));
+SELECT * FROM sales_range_key_partitioned
+WHERE region='Europe' AND order_date='2023-01-01';
+SET @end = UNIX_TIMESTAMP(NOW(6));
+SET @total_time = @total_time + (@end - @start);
+
+-- Run 9
+SET @start = UNIX_TIMESTAMP(NOW(6));
+SELECT * FROM sales_range_key_partitioned
+WHERE region='Europe' AND order_date='2023-01-01';
+SET @end = UNIX_TIMESTAMP(NOW(6));
+SET @total_time = @total_time + (@end - @start);
+
+-- Run 10
+SET @start = UNIX_TIMESTAMP(NOW(6));
+SELECT * FROM sales_range_key_partitioned
+WHERE region='Europe' AND order_date='2023-01-01';
+SET @end = UNIX_TIMESTAMP(NOW(6));
+SET @total_time = @total_time + (@end - @start);
+
+-- Calculate average
+SELECT @total_time / 10 AS avg_query_execution_time_seconds;
+
+-- Non-partitioned
+-- Initialize total time
+SET @total_time = 0;
+
+-- Run 1
+SET @start = UNIX_TIMESTAMP(NOW(6));
+SELECT * FROM sales_database.sales
+WHERE region='Europe' AND order_date='2023-01-01';
+SET @end = UNIX_TIMESTAMP(NOW(6));
+SET @total_time = @total_time + (@end - @start);
+
+-- Run 2
+SET @start = UNIX_TIMESTAMP(NOW(6));
+SELECT * FROM sales_database.sales
+WHERE region='Europe' AND order_date='2023-01-01';
+SET @end = UNIX_TIMESTAMP(NOW(6));
+SET @total_time = @total_time + (@end - @start);
+
+-- Run 3
+SET @start = UNIX_TIMESTAMP(NOW(6));
+SELECT * FROM sales_database.sales
+WHERE region='Europe' AND order_date='2023-01-01';
+SET @end = UNIX_TIMESTAMP(NOW(6));
+SET @total_time = @total_time + (@end - @start);
+
+-- Run 4
+SET @start = UNIX_TIMESTAMP(NOW(6));
+SELECT * FROM sales_database.sales
+WHERE region='Europe' AND order_date='2023-01-01';
+SET @end = UNIX_TIMESTAMP(NOW(6));
+SET @total_time = @total_time + (@end - @start);
+
+-- Run 5
+SET @start = UNIX_TIMESTAMP(NOW(6));
+SELECT * FROM sales_database.sales
+WHERE region='Europe' AND order_date='2023-01-01';
+SET @end = UNIX_TIMESTAMP(NOW(6));
+SET @total_time = @total_time + (@end - @start);
+
+-- Run 6
+SET @start = UNIX_TIMESTAMP(NOW(6));
+SELECT * FROM sales_database.sales
+WHERE region='Europe' AND order_date='2023-01-01';
+SET @end = UNIX_TIMESTAMP(NOW(6));
+SET @total_time = @total_time + (@end - @start);
+
+-- Run 7
+SET @start = UNIX_TIMESTAMP(NOW(6));
+SELECT * FROM sales_database.sales
+WHERE region='Europe' AND order_date='2023-01-01';
+SET @end = UNIX_TIMESTAMP(NOW(6));
+SET @total_time = @total_time + (@end - @start);
+
+-- Run 8
+SET @start = UNIX_TIMESTAMP(NOW(6));
+SELECT * FROM sales_database.sales
+WHERE region='Europe' AND order_date='2023-01-01';
+SET @end = UNIX_TIMESTAMP(NOW(6));
+SET @total_time = @total_time + (@end - @start);
+
+-- Run 9
+SET @start = UNIX_TIMESTAMP(NOW(6));
+SELECT * FROM sales_database.sales
+WHERE region='Europe' AND order_date='2023-01-01';
+SET @end = UNIX_TIMESTAMP(NOW(6));
+SET @total_time = @total_time + (@end - @start);
+
+-- Run 10
+SET @start = UNIX_TIMESTAMP(NOW(6));
+SELECT * FROM sales_database.sales
+WHERE region='Europe' AND order_date='2023-01-01';
+SET @end = UNIX_TIMESTAMP(NOW(6));
+SET @total_time = @total_time + (@end - @start);
+
+-- Calculate average
+SELECT @total_time / 10 AS avg_query_execution_time_seconds;
+
+
+Partitioned
+Non-partitioned
+0.202184800000000000000000000000
+2.248528800000000000000000000000
+
+
+
+Scalability
+-- Partitioned
+-- Initialize total times
+SET @total_time_small = 0;
+SET @total_time_medium = 0;
+SET @total_time_large = 0;
+
+-- Small dataset
+SET @start = UNIX_TIMESTAMP(NOW(6));
+SELECT COUNT(*) 
+FROM sales_range_key_partitioned
+WHERE region='Europe' AND order_date BETWEEN '2023-01-01' AND '2023-01-07';
+SET @end = UNIX_TIMESTAMP(NOW(6));
+SET @total_time_small = @end - @start;
+
+-- Medium dataset
+SET @start = UNIX_TIMESTAMP(NOW(6));
+SELECT COUNT(*) 
+FROM sales_range_key_partitioned
+WHERE region='Europe' AND order_date BETWEEN '2023-01-01' AND '2023-03-31';
+SET @end = UNIX_TIMESTAMP(NOW(6));
+SET @total_time_medium = @end - @start;
+
+-- Large dataset
+SET @start = UNIX_TIMESTAMP(NOW(6));
+SELECT COUNT(*) 
+FROM sales_range_key_partitioned
+WHERE region='Europe' AND order_date BETWEEN '2023-01-01' AND '2023-12-31';
+SET @end = UNIX_TIMESTAMP(NOW(6));
+SET @total_time_large = @end - @start;
+
+-- Show results
+SELECT 
+    @total_time_small AS small_dataset_seconds,
+    @total_time_medium AS medium_dataset_seconds,
+    @total_time_large AS large_dataset_seconds;
+
+
+
+Partitioned
+
+
+
+
+
+
+Small
+Medium
+Large
+0.228912		
+0.171928
+0.189784
+
+
+-- Non-partitioned
+-- Partitioned
+-- Initialize total times
+SET @total_time_small = 0;
+SET @total_time_medium = 0;
+SET @total_time_large = 0;
+
+-- Small dataset
+SET @start = UNIX_TIMESTAMP(NOW(6));
+SELECT COUNT(*) 
+FROM sales_database.sales
+WHERE region='Europe' AND order_date BETWEEN '2023-01-01' AND '2023-01-07';
+SET @end = UNIX_TIMESTAMP(NOW(6));
+SET @total_time_small = @end - @start;
+
+-- Medium dataset
+SET @start = UNIX_TIMESTAMP(NOW(6));
+SELECT COUNT(*) 
+FROM sales_database.sales
+WHERE region='Europe' AND order_date BETWEEN '2023-01-01' AND '2023-03-31';
+SET @end = UNIX_TIMESTAMP(NOW(6));
+SET @total_time_medium = @end - @start;
+
+-- Large dataset
+SET @start = UNIX_TIMESTAMP(NOW(6));
+SELECT COUNT(*) 
+FROM sales_database.sales
+WHERE region='Europe' AND order_date BETWEEN '2023-01-01' AND '2023-12-31';
+SET @end = UNIX_TIMESTAMP(NOW(6));
+SET @total_time_large = @end - @start;
+
+-- Show results
+SELECT 
+    @total_time_small AS small_dataset_seconds,
+    @total_time_medium AS medium_dataset_seconds,
+    @total_time_large AS large_dataset_seconds;
+
+
+
+Non-partitioned
+
+
+
+
+
+
+Small
+Medium
+Large
+2.080890		
+1.818429
+1.931275
+
+
+
+
+
+Partitioned
+Non-partitioned
+Small 
+
+
+
+
+Medium
+
+
+
+
+Large
+
+
+
+
+
+
+Throughput - query per second
+100
+DELIMITER $$
+
+CREATE PROCEDURE test_qps_partitioned(IN runs INT)
+BEGIN
+    DECLARE i INT DEFAULT 0;
+    DECLARE start_time DOUBLE;
+    DECLARE end_time DOUBLE;
+    DECLARE total_time DOUBLE;
+    DECLARE dummy INT;
+
+    -- Start time with microseconds
+    SET start_time = UNIX_TIMESTAMP(NOW(6));
+
+    -- Loop to run the query multiple times
+    WHILE i < runs DO
+        -- Use INTO @dummy to avoid returning rows
+        SELECT COUNT(*) INTO dummy 
+        FROM sales_range_key_partitioned
+        WHERE region='Europe' 
+          AND order_date = '2024-01-01';
+        SET i = i + 1;
+    END WHILE;
+
+    -- End time with microseconds
+    SET end_time = UNIX_TIMESTAMP(NOW(6));
+
+    -- Total elapsed time in seconds (decimal)
+    SET total_time = end_time - start_time;
+
+    -- Show only QPS result
+    SELECT runs / total_time AS queries_per_second;
+END$$
+
+DELIMITER ;
+
+-- Run for 100 queries
+CALL test_qps_partitioned(100);
+
+
+-- Non-partitioned
+DELIMITER $$
+
+CREATE PROCEDURE test_qps_nonpartitioned(IN runs INT)
+BEGIN
+    DECLARE i INT DEFAULT 0;
+    DECLARE start_time DOUBLE;
+    DECLARE end_time DOUBLE;
+    DECLARE total_time DOUBLE;
+    DECLARE dummy INT;
+
+    -- Start time with microseconds
+    SET start_time = UNIX_TIMESTAMP(NOW(6));
+
+    -- Loop to run the query multiple times
+    WHILE i < runs DO
+        -- Use INTO @dummy to avoid returning rows
+        SELECT COUNT(*) INTO dummy 
+        FROM sales_database.sales
+        WHERE region='Europe' 
+          AND order_date = '2024-01-01';
+        SET i = i + 1;
+    END WHILE;
+
+    -- End time with microseconds
+    SET end_time = UNIX_TIMESTAMP(NOW(6));
+
+    -- Total elapsed time in seconds (decimal)
+    SET total_time = end_time - start_time;
+
+    -- Show only QPS result
+    SELECT runs / total_time AS queries_per_second;
+END$$
+
+DELIMITER ;
+
+-- Run for 100 queries
+CALL test_qps_nonpartitioned(100);
+
+20
+-- Partitioned
+DELIMITER $$
+
+CREATE PROCEDURE test_qps_partitioned20(IN runs INT)
+BEGIN
+    DECLARE i INT DEFAULT 0;
+    DECLARE start_time DOUBLE;
+    DECLARE end_time DOUBLE;
+    DECLARE total_time DOUBLE;
+    DECLARE dummy INT;
+
+    -- Start time with microseconds
+    SET start_time = UNIX_TIMESTAMP(NOW(6));
+
+    -- Loop to run the query multiple times
+    WHILE i < runs DO
+        -- Use INTO @dummy to avoid returning rows
+        SELECT COUNT(*) INTO dummy 
+        FROM sales_range_key_partitioned
+        WHERE region='Europe' 
+          AND order_date = '2024-01-01';
+        SET i = i + 1;
+    END WHILE;
+
+    -- End time with microseconds
+    SET end_time = UNIX_TIMESTAMP(NOW(6));
+
+    -- Total elapsed time in seconds (decimal)
+    SET total_time = end_time - start_time;
+
+    -- Show only QPS result
+    SELECT runs / total_time AS queries_per_second;
+END$$
+
+DELIMITER ;
+
+-- Run for 20 queries
+CALL test_qps_partitioned20(20);
+
+
+-- Non-partitioned
+DELIMITER $$
+
+CREATE PROCEDURE test_qps_nonpartitioned20(IN runs INT)
+BEGIN
+    DECLARE i INT DEFAULT 0;
+    DECLARE start_time DOUBLE;
+    DECLARE end_time DOUBLE;
+    DECLARE total_time DOUBLE;
+    DECLARE dummy INT;
+
+    -- Start time with microseconds
+    SET start_time = UNIX_TIMESTAMP(NOW(6));
+
+    -- Loop to run the query multiple times
+    WHILE i < runs DO
+        -- Use INTO @dummy to avoid returning rows
+        SELECT COUNT(*) INTO dummy 
+        FROM sales_database.sales
+        WHERE region='Europe' 
+          AND order_date = '2024-01-01';
+        SET i = i + 1;
+    END WHILE;
+
+    -- End time with microseconds
+    SET end_time = UNIX_TIMESTAMP(NOW(6));
+
+    -- Total elapsed time in seconds (decimal)
+    SET total_time = end_time - start_time;
+
+    -- Show only QPS result
+    SELECT runs / total_time AS queries_per_second;
+END$$
+
+DELIMITER ;
+
+-- Run for 20 queries
+CALL test_qps_nonpartitioned20(20);
+
+
+Queries number
+Partitioned
+Non-partitioned
+100
+15.564304100600014 queries
+Time run out (exceed 30s)
+20
+13.66043702739299 queries
+0.750203981579123 queries
+
+
+(x) Memory Usage
+-- Partitioned
+SELECT * FROM sales_range_key_partitioned
+WHERE region='Europe' AND order_date = '2024-01-01';
+
+SHOW GLOBAL STATUS LIKE 'Innodb_buffer_pool_bytes_data';
+
+
+-- Non-partitioned
+SELECT * FROM sales_database.sales
+WHERE region='Europe' AND order_date = '2024-01-01';
+
+SHOW GLOBAL STATUS LIKE 'Innodb_buffer_pool_bytes_data';
+
+
+
+
+
+P
+NP
+Before
+117866496
+134070272
+After
+117866496
+134070272
+
+
+
+117,719,040÷(1024×1024)≈112.3 MB
