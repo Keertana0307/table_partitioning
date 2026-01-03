@@ -1,3 +1,6 @@
+
+SELECT * FROM sales WHERE Order_ID = 123456;
+
 CREATE TABLE sales_hash (
     Region VARCHAR(50),
     Country VARCHAR(50),
@@ -15,6 +18,39 @@ CREATE TABLE sales_hash (
     Total_Profit DECIMAL(15,2),
     PRIMARY KEY (Order_ID)
 )
+
+LOAD DATA INFILE 'C:\Users\NUHAA\Downloads\sales_2021_2024.csv''
+INTO TABLE sales_source
+FIELDS TERMINATED BY ','
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS
+(Region, Country, Item_Type, Sales_Channel, Order_Priority,
+ @Order_Date, Order_ID, @Ship_Date, Units_Sold,
+ Unit_Price, Unit_Cost, Total_Revenue, Total_Cost, Total_Profit)
+SET
+ Order_Date = STR_TO_DATE(@Order_Date, '%m/%d/%Y'),
+ Ship_Date  = STR_TO_DATE(@Ship_Date, '%m/%d/%Y');
+
 PARTITION BY HASH (Order_ID)
 PARTITIONS 6;
 
+
+INSERT INTO sales_hash
+SELECT * FROM sales_source;
+
+SELECT
+    PARTITION_NAME,
+    TABLE_ROWS
+FROM INFORMATION_SCHEMA.PARTITIONS
+WHERE TABLE_NAME = 'sales_hash';
+
+EXPLAIN ANALYZE
+SELECT *
+FROM sales_hash
+WHERE Order_ID = 7734891;
+
+EXPLAIN ANALYZE
+SELECT *
+FROM sales_source
+WHERE Order_ID = 7734891;
