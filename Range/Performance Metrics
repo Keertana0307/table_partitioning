@@ -115,6 +115,78 @@ SET @end = UNIX_TIMESTAMP(NOW(6));
 SET @total_access_time = @total_access_time + (@end - @start);
 
 -- Query execution time
+-- Run 1
+SET @start = UNIX_TIMESTAMP(NOW(6));
+SELECT * FROM range_sales
+WHERE country='Canada' AND order_date='2022-01-01';
+SET @end = UNIX_TIMESTAMP(NOW(6));
+SET @total_time = @total_time + (@end - @start);
+ 
+-- Run 2
+SET @start = UNIX_TIMESTAMP(NOW(6));
+SELECT * FROM range_sales
+WHERE country='Canada' AND order_date='2022-01-01';
+SET @end = UNIX_TIMESTAMP(NOW(6));
+SET @total_time = @total_time + (@end - @start);
+ 
+-- Run 3
+SET @start = UNIX_TIMESTAMP(NOW(6));
+SELECT * FROM range_sales
+WHERE country='Canada' AND order_date='2022-01-01';
+SET @end = UNIX_TIMESTAMP(NOW(6));
+SET @total_time = @total_time + (@end - @start);
+ 
+-- Run 4
+SET @start = UNIX_TIMESTAMP(NOW(6));
+SELECT * FROM range_sales
+WHERE country='Canada' AND order_date='2022-01-01';
+SET @end = UNIX_TIMESTAMP(NOW(6));
+SET @total_time = @total_time + (@end - @start);
+ 
+-- Run 5
+SET @start = UNIX_TIMESTAMP(NOW(6));
+SELECT * FROM range_sales
+WHERE country='Canada' AND order_date='2022-01-01';
+SET @end = UNIX_TIMESTAMP(NOW(6));
+SET @total_time = @total_time + (@end - @start);
+ 
+-- Run 6
+SET @start = UNIX_TIMESTAMP(NOW(6));
+SELECT * FROM range_sales
+WHERE country='Canada' AND order_date='2022-01-01';
+SET @end = UNIX_TIMESTAMP(NOW(6));
+SET @total_time = @total_time + (@end - @start);
+ 
+-- Run 7
+SET @start = UNIX_TIMESTAMP(NOW(6));
+SELECT * FROM range_sales
+WHERE country='Canada' AND order_date='2022-01-01';
+SET @end = UNIX_TIMESTAMP(NOW(6));
+SET @total_time = @total_time + (@end - @start);
+ 
+-- Run 8
+SET @start = UNIX_TIMESTAMP(NOW(6));
+SELECT * FROM range_sales
+WHERE country='Canada' AND order_date='2022-01-01';
+SET @end = UNIX_TIMESTAMP(NOW(6));
+SET @total_time = @total_time + (@end - @start);
+ 
+-- Run 9
+SET @start = UNIX_TIMESTAMP(NOW(6));
+SELECT * FROM range_sales
+WHERE country='Canada' AND order_date='2022-01-01';
+SET @end = UNIX_TIMESTAMP(NOW(6));
+SET @total_time = @total_time + (@end - @start);
+ 
+-- Run 10
+SET @start = UNIX_TIMESTAMP(NOW(6));
+SELECT * FROM range_sales
+WHERE country='Canada' AND order_date='2022-01-01';
+SET @end = UNIX_TIMESTAMP(NOW(6));
+SET @total_time = @total_time + (@end - @start);
+ 
+-- Calculate average
+SELECT @total_time / 10 AS avg_query_execution_time_seconds
 
 -- Scalability
 - Initialize total times
