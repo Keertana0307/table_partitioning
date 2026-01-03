@@ -1,1 +1,20 @@
+CREATE TABLE sales_hash (
+    Region VARCHAR(50),
+    Country VARCHAR(50),
+    Item_Type VARCHAR(50),
+    Sales_Channel VARCHAR(20),
+    Order_Priority CHAR(1),
+    Order_Date DATE,
+    Order_ID BIGINT,
+    Ship_Date DATE,
+    Units_Sold INT,
+    Unit_Price DECIMAL(10,2),
+    Unit_Cost DECIMAL(10,2),
+    Total_Revenue DECIMAL(15,2),
+    Total_Cost DECIMAL(15,2),
+    Total_Profit DECIMAL(15,2),
+    PRIMARY KEY (Order_ID)
+)
+PARTITION BY HASH (Order_ID)
+PARTITIONS 6;
 
