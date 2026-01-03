@@ -155,16 +155,6 @@ SET @total_time = @total_time + (@end - @start);
 SELECT @total_time / 10 AS avg_access_time_seconds;
 
 
-
-
-
-P
-NP
-Average
-0.017142700000000000000000000000
-0.017295400000000000000000000000
-
-
 Query Execution Time
 -- Partitioned
 -- Initialize total time
@@ -342,15 +332,6 @@ SET @total_time = @total_time + (@end - @start);
 SELECT @total_time / 10 AS avg_access_time_seconds;
 
 
-
-
-P
-NP
-Average (Run 10 times
-0.044185500000000000000000000000
-0.223127600000000000000000000000
-
-
 Scalability
 -- Partitioned
 -- Initialize total times
@@ -394,24 +375,6 @@ SELECT
     @total_time_medium AS medium_dataset_seconds,
     @total_time_large AS large_dataset_seconds;
 
-
-
-
-Partitioned
-
-
-
-
-
-
-Small
-Medium
-Large
-0.201025		
-0.038097
-0.045664
-
-
 -- Non-partitioned
 -- Initialize total times
 SET @total_time_small = 0;
@@ -453,22 +416,6 @@ SELECT
     @total_time_small AS small_dataset_seconds,
     @total_time_medium AS medium_dataset_seconds,
     @total_time_large AS large_dataset_seconds;
-
-
-
-Non-partitioned
-
-
-
-
-
-
-Small
-Medium
-Large
-2.710062		
-1.800091
-1.765779
 
 
 Throughput
@@ -551,53 +498,4 @@ DELIMITER ;
 
 -- Run for 20 queries
 CALL test_qps_nonpartitioned20(20);
-
-
-Queries number
-Partitioned
-Non-partitioned
-100
-
-
-
-
-20
-87.58213362093717 queries
-0.7265905243785284 query
-
-
-
-(X) Memory Usage
--- Partitioned
-
-SELECT *
-FROM sales_list_key_partitioned
-WHERE Item_Type_ID = 3 AND Order_Priority = 'H';
-
-SHOW GLOBAL STATUS LIKE 'Innodb_buffer_pool_bytes_data';
-
--- Non-partitioned
-SELECT * 
-FROM sales_database.sales 
-WHERE Item_Type = 'Fruit' AND Order_Priority = 'H';
-
-SHOW GLOBAL STATUS LIKE 'Innodb_buffer_pool_bytes_data';
-
-
-
-
-P
-NP
-Before & After
-134070272
-
-
-
-134070272
-After
-
-
-
-
-
 
