@@ -1,5 +1,5 @@
 CREATE TABLE sales_list (
-	id BIGINT NOT NULL AUTO_INCREMENT,
+    id BIGINT NOT NULL AUTO_INCREMENT,
     Region VARCHAR(255),
     Country VARCHAR(255),
     Item_Type VARCHAR(255),
@@ -14,22 +14,14 @@ CREATE TABLE sales_list (
     Total_Revenue DECIMAL(15,2),
     Total_Cost DECIMAL(15,2),
     Total_Profit DECIMAL(15,2),
-	PRIMARY KEY (id, Region)
+    PRIMARY KEY (id, Region)
 )
 PARTITION BY LIST COLUMNS (Region) (
-    PARTITION p_europe VALUES IN ('EUROPE'),
-    PARTITION p_na VALUES IN ('NORTH AMERICA'),
-    PARTITION p_asia VALUES IN ('ASIA'),
-    PARTITION p_mea VALUES IN ('MIDDLE EAST AND NORTH AFRICA'),
-    PARTITION p_oceania VALUES IN ('AUSTRALIA AND OCEANIA')
+    PARTITION p_asia VALUES IN ('Asia'),
+    PARTITION p_europe VALUES IN ('Europe'),
+    PARTITION p_ssa VALUES IN ('Sub-Saharan Africa'),
+    PARTITION p_mena VALUES IN ('Middle East and North Africa'),
+    PARTITION p_ausoc VALUES IN ('Australia and Oceania'),
+    PARTITION p_cac VALUES IN ('Central America and the Caribbean'),
+    PARTITION p_na VALUES IN ('North America')
 );
-
-
-
-
-
-
-
-
-
-
