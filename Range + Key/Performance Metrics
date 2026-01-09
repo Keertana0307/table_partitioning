@@ -74,7 +74,7 @@ SET @end = UNIX_TIMESTAMP(NOW(6));
 SET @total_time = @total_time + (@end - @start);
 
 -- Calculate average
-SELECT @total_time / 10 AS avg_query_execution_time_seconds;
+SELECT @total_time / 10 AS avg_time_seconds;
 
 -- Non-partitioned
 -- Initialize total time
@@ -151,7 +151,7 @@ SET @end = UNIX_TIMESTAMP(NOW(6));
 SET @total_time = @total_time + (@end - @start);
 
 -- Calculate average
-SELECT @total_time / 10 AS avg_query_execution_time_seconds;
+SELECT @total_time / 10 AS avg_time_seconds;
 
 -- Throughput
 -- Partitioned
