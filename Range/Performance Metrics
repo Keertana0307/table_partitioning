@@ -1,673 +1,159 @@
--- Range Partition
--- access time
--- RUN 1
-SET @start = UNIX_TIMESTAMP(NOW(6));
- 
-SELECT * 
-FROM sales_range_partitioned
-WHERE customer_id = 1001
-  AND region = 'Europe';
- 
-SET @end = UNIX_TIMESTAMP(NOW(6));
-SET @total_access_time = @total_access_time + (@end - @start);
- 
--- RUN 2
-SET @start = UNIX_TIMESTAMP(NOW(6));
- 
-SELECT * 
-FROM sales_range_partitioned
-WHERE customer_id = 1001
-  AND region = 'Europe';
- 
-SET @end = UNIX_TIMESTAMP(NOW(6));
-SET @total_access_time = @total_access_time + (@end - @start);
- 
--- RUN 3
-SET @start = UNIX_TIMESTAMP(NOW(6));
- 
-SELECT * 
-FROM  sales_range_partitioned
-WHERE customer_id = 1001
-  AND region = 'Europe';
- 
-SET @end = UNIX_TIMESTAMP(NOW(6));
-SET @total_access_time = @total_access_time + (@end - @start);
- 
--- RUN 4
- 
-SET @start = UNIX_TIMESTAMP(NOW(6));
- 
-SELECT * 
-FROM sales_range_partitioned
-WHERE customer_id = 1001
-  AND region = 'Europe';
- 
-SET @end = UNIX_TIMESTAMP(NOW(6));
-SET @total_access_time = @total_access_time + (@end - @start);
+-- Query Execution Time
+-- Partitioned
+-- Initialize total time
+SET @total_time = 0;
 
--- RUN 5
- 
-SET @start = UNIX_TIMESTAMP(NOW(6));
- 
-SELECT * 
-FROM sales_range_partitioned
-WHERE customer_id = 1001
-  AND region = 'Europe';
- 
-SET @end = UNIX_TIMESTAMP(NOW(6));
-SET @total_access_time = @total_access_time + (@end - @start);
- 
--- RUN 6
-SET @start = UNIX_TIMESTAMP(NOW(6));
- 
-SELECT * 
-FROM sales_range_partitioned
-WHERE customer_id = 1001
-  AND region = 'Europe';
- 
-SET @end = UNIX_TIMESTAMP(NOW(6));
-SET @total_access_time = @total_access_time + (@end - @start);
- 
--- RUN 7
-SET @start = UNIX_TIMESTAMP(NOW(6));
- 
-SELECT * 
-FROM sales_range_partitioned
-WHERE customer_id = 1001
-  AND region = 'Europe';
- 
-SET @end = UNIX_TIMESTAMP(NOW(6));
-SET @total_access_time = @total_access_time + (@end - @start);
- 
--- RUN 8
- 
-SET @start = UNIX_TIMESTAMP(NOW(6));
- 
-SELECT * 
-FROM sales_range_partitioned
-WHERE customer_id = 1001
-  AND region = 'Europe';
- 
-SET @end = UNIX_TIMESTAMP(NOW(6));
-SET @total_access_time = @total_access_time + (@end - @start);
- 
--- RUN 9
- 
-SET @start = UNIX_TIMESTAMP(NOW(6));
- 
-SELECT * 
-FROM sales_range_partitioned
-WHERE customer_id = 1001
-  AND region = 'Europe';
- 
-SET @end = UNIX_TIMESTAMP(NOW(6));
-SET @total_access_time = @total_access_time + (@end - @start);
- 
--- RUN 10
-SET @start = UNIX_TIMESTAMP(NOW(6));
- 
-SELECT * 
-FROM sales_range_partitioned
-WHERE customer_id = 1001
-  AND region = 'Europe';
- 
-SET @end = UNIX_TIMESTAMP(NOW(6));
-SET @total_access_time = @total_access_time + (@end - @start);
-
--- Query execution time
 -- Run 1
 SET @start = UNIX_TIMESTAMP(NOW(6));
-SELECT * FROM range_sales
-WHERE country='Canada' AND order_date='2022-01-01';
+SELECT * FROM sales_range
+WHERE region='Europe' AND order_date='2023-01-01';
 SET @end = UNIX_TIMESTAMP(NOW(6));
 SET @total_time = @total_time + (@end - @start);
- 
+
 -- Run 2
 SET @start = UNIX_TIMESTAMP(NOW(6));
-SELECT * FROM range_sales
-WHERE country='Canada' AND order_date='2022-01-01';
+SELECT * FROM sales_range
+WHERE region='Europe' AND order_date='2023-01-01';
 SET @end = UNIX_TIMESTAMP(NOW(6));
 SET @total_time = @total_time + (@end - @start);
- 
+
 -- Run 3
 SET @start = UNIX_TIMESTAMP(NOW(6));
-SELECT * FROM range_sales
-WHERE country='Canada' AND order_date='2022-01-01';
+SELECT * FROM sales_range
+WHERE region='Europe' AND order_date='2023-01-01';
 SET @end = UNIX_TIMESTAMP(NOW(6));
 SET @total_time = @total_time + (@end - @start);
- 
+
 -- Run 4
 SET @start = UNIX_TIMESTAMP(NOW(6));
-SELECT * FROM range_sales
-WHERE country='Canada' AND order_date='2022-01-01';
+SELECT * FROM sales_range
+WHERE region='Europe' AND order_date='2023-01-01';
 SET @end = UNIX_TIMESTAMP(NOW(6));
 SET @total_time = @total_time + (@end - @start);
- 
+
 -- Run 5
 SET @start = UNIX_TIMESTAMP(NOW(6));
-SELECT * FROM range_sales
-WHERE country='Canada' AND order_date='2022-01-01';
+SELECT * FROM sales_range
+WHERE region='Europe' AND order_date='2023-01-01';
 SET @end = UNIX_TIMESTAMP(NOW(6));
 SET @total_time = @total_time + (@end - @start);
- 
+
 -- Run 6
 SET @start = UNIX_TIMESTAMP(NOW(6));
-SELECT * FROM range_sales
-WHERE country='Canada' AND order_date='2022-01-01';
+SELECT * FROM sales_range
+WHERE region='Europe' AND order_date='2023-01-01';
 SET @end = UNIX_TIMESTAMP(NOW(6));
 SET @total_time = @total_time + (@end - @start);
- 
+
 -- Run 7
 SET @start = UNIX_TIMESTAMP(NOW(6));
-SELECT * FROM range_sales
-WHERE country='Canada' AND order_date='2022-01-01';
+SELECT * FROM sales_range
+WHERE region='Europe' AND order_date='2023-01-01';
 SET @end = UNIX_TIMESTAMP(NOW(6));
 SET @total_time = @total_time + (@end - @start);
- 
+
 -- Run 8
 SET @start = UNIX_TIMESTAMP(NOW(6));
-SELECT * FROM range_sales
-WHERE country='Canada' AND order_date='2022-01-01';
+SELECT * FROM sales_range
+WHERE region='Europe' AND order_date='2023-01-01';
 SET @end = UNIX_TIMESTAMP(NOW(6));
 SET @total_time = @total_time + (@end - @start);
- 
+
 -- Run 9
 SET @start = UNIX_TIMESTAMP(NOW(6));
-SELECT * FROM range_sales
-WHERE country='Canada' AND order_date='2022-01-01';
+SELECT * FROM sales_range
+WHERE region='Europe' AND order_date='2023-01-01';
 SET @end = UNIX_TIMESTAMP(NOW(6));
 SET @total_time = @total_time + (@end - @start);
- 
+
 -- Run 10
 SET @start = UNIX_TIMESTAMP(NOW(6));
-SELECT * FROM range_sales
-WHERE country='Canada' AND order_date='2022-01-01';
-SET @end = UNIX_TIMESTAMP(NOW(6));
-SET @total_time = @total_time + (@end - @start);
- 
--- Calculate average
-SELECT @total_time / 10 AS avg_query_execution_time_seconds
-
--- Scalability
-- Initialize total times
-SET @total_time_small = 0;
-SET @total_time_medium = 0;
-SET @total_time_large = 0;
- 
--- Small dataset
-SET @start = UNIX_TIMESTAMP(NOW(6));
-SELECT COUNT(*) 
-FROM range_sales.sales
-WHERE Country = 'Canada'
-    AND Ship_Date BETWEEN '2022-01-01' AND '2022-01-07';
-SET @end = UNIX_TIMESTAMP(NOW(6));
-SET @total_time_small = @end - @start;
- 
--- Medium dataset
-SET @start = UNIX_TIMESTAMP(NOW(6));
-SELECT COUNT(*) 
-FROM range_sales.salesWHERE Country = 'Canada'
-    AND Ship_Date BETWEEN '2022-01-01' AND '2022-01-07';
-SET @end = UNIX_TIMESTAMP(NOW(6));
-SET @total_time_medium = @end - @start;
- 
-- Large dataset
-SET @start = UNIX_TIMESTAMP(NOW(6));
-SELECT COUNT(*) 
-FROM range_sales.sales
-WHERE Country = 'Canada'
-    AND Ship_Date BETWEEN '2022-01-01' AND '2022-01-07';
-SET @end = UNIX_TIMESTAMP(NOW(6));
-SET @total_time_large = @end - @start;
-
--- Show results
-SELECT 
-    @total_time_small AS small_dataset_seconds,
-    @total_time_medium AS medium_dataset_seconds,
-    @total_time_large AS large_dataset_seconds;
-
--- Throughput
--- RUN 1
- 
-SET @start = UNIX_TIMESTAMP(NOW(6));
-SELECT * 
-FROM sales_range_partitioned
-WHERE customer_id = 1001
-  AND region = 'Europe';
-SET @end = UNIX_TIMESTAMP(NOW(6));
-SET @total_time = @total_time + (@end - @start);
- 
--- RUN 2
- 
-SET @start = UNIX_TIMESTAMP(NOW(6));
-SELECT * 
-FROM sales_range_partitioned
-WHERE customer_id = 1001
-  AND region = 'Europe';
-SET @end = UNIX_TIMESTAMP(NOW(6));
-SET @total_time = @total_time + (@end - @start);
-
--- RUN 3
- 
-SET @start = UNIX_TIMESTAMP(NOW(6));
-SELECT * 
-FROM sales_range_partitioned
-WHERE customer_id = 1001
-  AND region = 'Europe';
-SET @end = UNIX_TIMESTAMP(NOW(6));
-SET @total_time = @total_time + (@end - @start);
-
--- RUN 4
- 
-SET @start = UNIX_TIMESTAMP(NOW(6));
-SELECT * 
-FROM sales_range_partitioned
-WHERE customer_id = 1001
-  AND region = 'Europe';
-SET @end = UNIX_TIMESTAMP(NOW(6));
-SET @total_time = @total_time + (@end - @start);
- 
- 
-SELECT * 
-FROM sales_range_partitioned
-WHERE customer_id = 1001
-  AND region = 'Europe';
-SET @end = UNIX_TIMESTAMP(NOW(6));
-SET @total_time = @total_time + (@end - @start);
- 
--- RUN 5
- 
-SET @start = UNIX_TIMESTAMP(NOW(6));
-SELECT * 
-FROM sales_range_partitioned
-WHERE customer_id = 1001
-  AND region = 'Europe';
-SET @end = UNIX_TIMESTAMP(NOW(6));
-SET @total_time = @total_time + (@end - @start);
- 
--- RUN 6
-SET @start = UNIX_TIMESTAMP(NOW(6));
-SELECT * 
-FROM sales_hash_partitioned
-WHERE customer_id = 1001
-  AND region = 'Europe';
- 
-SET @end = UNIX_TIMESTAMP(NOW(6));
-SET @total_time = @total_time + (@end - @start);
- 
--- RUN 7
-SET @start = UNIX_TIMESTAMP(NOW(6));
- 
-SELECT * 
-FROM sales_hash_partitioned
-WHERE customer_id = 1001
-  AND region = 'Europe';
-SET @end = UNIX_TIMESTAMP(NOW(6));
-SET @total_time = @total_time + (@end - @start);
- 
--- RUN 8
- 
-SET @start = UNIX_TIMESTAMP(NOW(6));
-SELECT * 
-FROM sales_hash_partitioned
-WHERE customer_id = 1001
-  AND region = 'Europe';
-SET @end = UNIX_TIMESTAMP(NOW(6));
-SET @total_time = @total_time + (@end - @start);
- 
--- RUN 9
- 
-SET @start = UNIX_TIMESTAMP(NOW(6));
-SELECT * 
-FROM sales_hash_partitioned
-WHERE customer_id = 1001
-  AND region = 'Europe';
-SET @end = UNIX_TIMESTAMP(NOW(6));
-SET @total_time = @total_time + (@end - @start);
-
--- RUN 10
-SET @start = UNIX_TIMESTAMP(NOW(6));
-SELECT * 
-FROM sales_hash_partitioned
-WHERE customer_id = 1001
-  AND region = 'Europe';
-SET @end = UNIX_TIMESTAMP(NOW(6));
-SET @total_time = @total_time + (@end - @start);
-
-
--- Non-partition
--- Access time
--- RUN 1
-SET @start = UNIX_TIMESTAMP(NOW(6));
- 
-SELECT * 
-FROM sales_nonpartitioned
-WHERE customer_id = 1001
-  AND region = 'Europe';
- 
-SET @end = UNIX_TIMESTAMP(NOW(6));
-SET @total_access_time = @total_access_time + (@end - @start);
- 
--- RUN 2
-SET @start = UNIX_TIMESTAMP(NOW(6));
- 
-SELECT * 
-FROM sales_nonpartitioned
-WHERE customer_id = 1001
-  AND region = 'Europe';
- 
-SET @end = UNIX_TIMESTAMP(NOW(6));
-SET @total_access_time = @total_access_time + (@end - @start);
- 
--- RUN 3
-SET @start = UNIX_TIMESTAMP(NOW(6));
- 
-SELECT * 
-FROM  sales_nonpartitionedm
-WHERE customer_id = 1001
-  AND region = 'Europe';
- 
-SET @end = UNIX_TIMESTAMP(NOW(6));
-SET @total_access_time = @total_access_time + (@end - @start);
- 
--- RUN 4
- 
-SET @start = UNIX_TIMESTAMP(NOW(6));
- 
-SELECT * 
-FROM sales_nonpartitioned
-WHERE customer_id = 1001
-  AND region = 'Europe';
- 
-SET @end = UNIX_TIMESTAMP(NOW(6));
-SET @total_access_time = @total_access_time + (@end - @start);
- 
--- RUN 5
- 
-SET @start = UNIX_TIMESTAMP(NOW(6));
- 
-SELECT * 
-FROM sales_nonpartitioned
-WHERE customer_id = 1001
-  AND region = 'Europe';
- 
-SET @end = UNIX_TIMESTAMP(NOW(6));
-SET @total_access_time = @total_access_time + (@end - @start);
- 
--- RUN 6
-SET @start = UNIX_TIMESTAMP(NOW(6));
- 
-SELECT * 
-FROM sales_nonpartitioned
-WHERE customer_id = 1001
-  AND region = 'Europe';
- 
-SET @end = UNIX_TIMESTAMP(NOW(6));
-SET @total_access_time = @total_access_time + (@end - @start);
- 
--- RUN 7
-SET @start = UNIX_TIMESTAMP(NOW(6));
- 
-SELECT * 
-FROM sales_nonpartitioned
-WHERE customer_id = 1001
-  AND region = 'Europe';
- 
-SET @end = UNIX_TIMESTAMP(NOW(6));
-SET @total_access_time = @total_access_time + (@end - @start);
- 
--- RUN 8
- 
-SET @start = UNIX_TIMESTAMP(NOW(6));
- 
-SELECT * 
-FROM sales_nonpartitioned
-WHERE customer_id = 1001
-  AND region = 'Europe';
- 
-SET @end = UNIX_TIMESTAMP(NOW(6));
-SET @total_access_time = @total_access_time + (@end - @start);
- 
--- RUN 9
- 
-SET @start = UNIX_TIMESTAMP(NOW(6));
- 
-SELECT * 
-FROM sales_nonpartitioned
-WHERE customer_id = 1001
-  AND region = 'Europe';
- 
-SET @end = UNIX_TIMESTAMP(NOW(6));
-SET @total_access_time = @total_access_time + (@end - @start);
- 
--- RUN 10
-SET @start = UNIX_TIMESTAMP(NOW(6));
- 
-SELECT * 
-FROM sales_range_partitioned
-WHERE customer_id = 1001
-  AND region = 'Europe';
- 
-SET @end = UNIX_TIMESTAMP(NOW(6));
-SET @total_access_time = @total_access_time + (@end - @start);
-
--- query execution time
--- Run 1
-SET @start = UNIX_TIMESTAMP(NOW(6));
-SELECT * FROM nonpartitioned_sales
-WHERE country='Canada' AND order_date='2022-01-01';
-SET @end = UNIX_TIMESTAMP(NOW(6));
-SET @total_time = @total_time + (@end - @start);
- 
--- Run 2
-SET @start = UNIX_TIMESTAMP(NOW(6));
-SELECT * FROM nonpartitioned_sales
-WHERE country='Canada' AND order_date='2022-01-01';
-SET @end = UNIX_TIMESTAMP(NOW(6));
-SET @total_time = @total_time + (@end - @start);
- 
--- Run 3
-SET @start = UNIX_TIMESTAMP(NOW(6));
-SELECT * FROM nonpartitioned_sales
-WHERE country='Canada' AND order_date='2022-01-01';
-SET @end = UNIX_TIMESTAMP(NOW(6));
-SET @total_time = @total_time + (@end - @start);
- 
--- Run 4
-SET @start = UNIX_TIMESTAMP(NOW(6));
-SELECT * FROM nonpartitioned_sales
-WHERE country='Canada' AND order_date='2022-01-01';
-SET @end = UNIX_TIMESTAMP(NOW(6));
-SET @total_time = @total_time + (@end - @start);
- 
--- Run 5
-SET @start = UNIX_TIMESTAMP(NOW(6));
-SELECT * FROM nonpartitioned_sales
-WHERE country='Canada' AND order_date='2022-01-01';
-SET @end = UNIX_TIMESTAMP(NOW(6));
-SET @total_time = @total_time + (@end - @start);
- 
--- Run 6
-SET @start = UNIX_TIMESTAMP(NOW(6));
-SELECT * FROM nonpartitioned_sales
-WHERE country='Canada' AND order_date='2022-01-01';
-SET @end = UNIX_TIMESTAMP(NOW(6));
-SET @total_time = @total_time + (@end - @start);
- 
--- Run 7
-SET @start = UNIX_TIMESTAMP(NOW(6));
-SELECT * FROM nonpartitioned_sales
-WHERE country='Canada' AND order_date='2022-01-01';
-SET @end = UNIX_TIMESTAMP(NOW(6));
-SET @total_time = @total_time + (@end - @start);
- 
--- Run 8
-SET @start = UNIX_TIMESTAMP(NOW(6));
-SELECT * FROM nonpartitioned_sales
-WHERE country='Canada' AND order_date='2022-01-01';
-SET @end = UNIX_TIMESTAMP(NOW(6));
-SET @total_time = @total_time + (@end - @start);
- 
--- Run 9
-SET @start = UNIX_TIMESTAMP(NOW(6));
-SELECT * FROM nonpartitioned_sales
-WHERE country='Canada' AND order_date='2022-01-01';
-SET @end = UNIX_TIMESTAMP(NOW(6));
-SET @total_time = @total_time + (@end - @start);
- 
--- Run 10
-SET @start = UNIX_TIMESTAMP(NOW(6));
-SELECT * FROM nonpartitioned_sales
-WHERE country='Canada' AND order_date='2022-01-01';
+SELECT * FROM sales_range
+WHERE region='Europe' AND order_date='2023-01-01';
 SET @end = UNIX_TIMESTAMP(NOW(6));
 SET @total_time = @total_time + (@end - @start);
 
 -- Calculate average
-SELECT @total_time / 10 AS avg_query_execution_time_seconds
+SELECT @total_time / 10 AS avg_query_execution_time_seconds;
 
--- Scalability
--- Initialize total times
-SET @total_time_small = 0;
-SET @total_time_medium = 0;
-SET @total_time_large = 0;
- 
--- Small dataset
-SET @start = UNIX_TIMESTAMP(NOW(6));
-SELECT COUNT(*) 
-FROM database_sales.sales
-WHERE Country = 'Canada'
-    AND Ship_Date BETWEEN '2022-01-01' AND '2022-01-07';
-SET @end = UNIX_TIMESTAMP(NOW(6));
-SET @total_time_small = @end - @start;
- 
--- Medium dataset
-SET @start = UNIX_TIMESTAMP(NOW(6));
-SELECT COUNT(*) 
-FROM database_sales.sales
-WHERE Country = 'Canada'
-    AND Ship_Date BETWEEN '2022-01-01' AND '2022-01-07';
-SET @end = UNIX_TIMESTAMP(NOW(6));
-SET @total_time_medium = @end - @start;
- 
--- Large dataset
-SET @start = UNIX_TIMESTAMP(NOW(6));
-SELECT COUNT(*) 
-FROM database_sales.sales
-WHERE Country = 'Canada'
-    AND Ship_Date BETWEEN '2022-01-01' AND '2022-01-07';
-SET @end = UNIX_TIMESTAMP(NOW(6));
-SET @total_time_large = @end - @start;
- 
--- Show results
-SELECT 
-    @total_time_small AS small_dataset_seconds,
-    @total_time_medium AS medium_dataset_seconds,
-    @total_time_large AS large_dataset_seconds;
+-- Non-partitioned
+-- Initialize total time
+SET @total_time = 0;
 
--- Throughput
--- RUN 1
- 
+-- Run 1
 SET @start = UNIX_TIMESTAMP(NOW(6));
-SELECT * 
-FROM sales_nonpartitioned
-WHERE customer_id = 1001
-  AND region = 'Europe';
+SELECT * FROM sales
+WHERE region='Europe' AND order_date='2023-01-01';
 SET @end = UNIX_TIMESTAMP(NOW(6));
 SET @total_time = @total_time + (@end - @start);
- 
--- RUN 2
- 
+
+-- Run 2
 SET @start = UNIX_TIMESTAMP(NOW(6));
-SELECT * 
-FROM sales_nonpartitioned
-WHERE customer_id = 1001
-  AND region = 'Europe';
+SELECT * FROM sales
+WHERE region='Europe' AND order_date='2023-01-01';
 SET @end = UNIX_TIMESTAMP(NOW(6));
 SET @total_time = @total_time + (@end - @start);
- 
--- RUN 3
- 
+
+-- Run 3
 SET @start = UNIX_TIMESTAMP(NOW(6));
-SELECT * 
-FROM sales_nonpartitioned
-WHERE customer_id = 1001
-  AND region = 'Europe';
+SELECT * FROM sales
+WHERE region='Europe' AND order_date='2023-01-01';
 SET @end = UNIX_TIMESTAMP(NOW(6));
 SET @total_time = @total_time + (@end - @start);
- 
- -- RUN 4
- 
+
+-- Run 4
 SET @start = UNIX_TIMESTAMP(NOW(6));
-SELECT * 
-FROM sales_nonpartitioned
-WHERE customer_id = 1001
-  AND region = 'Europe';
+SELECT * FROM sales
+WHERE region='Europe' AND order_date='2023-01-01';
 SET @end = UNIX_TIMESTAMP(NOW(6));
 SET @total_time = @total_time + (@end - @start);
- 
- 
-SELECT * 
-FROM sales_range_partitioned
-WHERE customer_id = 1001
-  AND region = 'Europe';
-SET @end = UNIX_TIMESTAMP(NOW(6));
-SET @total_time = @total_time + (@end - @start);
- 
--- RUN 5
- 
+
+-- Run 5
 SET @start = UNIX_TIMESTAMP(NOW(6));
-SELECT * 
-FROM sales_nonpartitioned
-WHERE customer_id = 1001
-  AND region = 'Europe';
+SELECT * FROM sales
+WHERE region='Europe' AND order_date='2023-01-01';
 SET @end = UNIX_TIMESTAMP(NOW(6));
 SET @total_time = @total_time + (@end - @start);
- 
--- RUN 6
+
+-- Run 6
 SET @start = UNIX_TIMESTAMP(NOW(6));
-SELECT * 
-FROM sales_nonpartitioned
-WHERE customer_id = 1001
-  AND region = 'Europe';
- 
+SELECT * FROM sales
+WHERE region='Europe' AND order_date='2023-01-01';
 SET @end = UNIX_TIMESTAMP(NOW(6));
 SET @total_time = @total_time + (@end - @start);
- 
--- RUN 7
+
+-- Run 7
 SET @start = UNIX_TIMESTAMP(NOW(6));
- 
-SELECT * 
-FROM sales_nonpartitioned
-WHERE customer_id = 1001
-  AND region = 'Europe';
+SELECT * FROM sales
+WHERE region='Europe' AND order_date='2023-01-01';
 SET @end = UNIX_TIMESTAMP(NOW(6));
 SET @total_time = @total_time + (@end - @start);
- 
--- RUN 8
- 
+
+-- Run 8
 SET @start = UNIX_TIMESTAMP(NOW(6));
-SELECT * 
-FROM sales_nonpartitioned
-WHERE customer_id = 1001
-  AND region = 'Europe';
+SELECT * FROM sales
+WHERE region='Europe' AND order_date='2023-01-01';
 SET @end = UNIX_TIMESTAMP(NOW(6));
 SET @total_time = @total_time + (@end - @start);
- 
--- RUN 9
- 
+
+-- Run 9
 SET @start = UNIX_TIMESTAMP(NOW(6));
-SELECT * 
-FROM sales_nonpartitioned
-WHERE customer_id = 1001
-  AND region = 'Europe';
+SELECT * FROM sales
+WHERE region='Europe' AND order_date='2023-01-01';
 SET @end = UNIX_TIMESTAMP(NOW(6));
 SET @total_time = @total_time + (@end - @start);
- 
--- RUN 10
+
+-- Run 10
 SET @start = UNIX_TIMESTAMP(NOW(6));
-SELECT * 
-FROM sales_nonpartitioned
-WHERE customer_id = 1001
-  AND region = 'Europe';
+SELECT * FROM sales
+WHERE region='Europe' AND order_date='2023-01-01';
 SET @end = UNIX_TIMESTAMP(NOW(6));
 SET @total_time = @total_time + (@end - @start);
+
+-- Calculate average
+SELECT @total_time / 10 AS avg_query_execution_time_seconds;
+
+
+
+
+
