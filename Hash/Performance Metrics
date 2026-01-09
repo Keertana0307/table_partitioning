@@ -94,7 +94,7 @@ SET @end = UNIX_TIMESTAMP(NOW(6));
 SET @total_time = @total_time + (@end - @start);
 
 -- Calculate average
-SELECT @total_time / 10 AS avg_access_time_seconds;
+SELECT @total_time / 10 AS avg_time_seconds;
 
 -- Non-partitioned
 -- Initialize total time
@@ -191,7 +191,7 @@ SET @end = UNIX_TIMESTAMP(NOW(6));
 SET @total_time = @total_time + (@end - @start);
 
 -- Calculate average
-SELECT @total_time / 10 AS avg_access_time_seconds;
+SELECT @total_time / 10 AS avg_time_seconds;
 
 
 -- Throughput
@@ -274,3 +274,88 @@ DELIMITER ;
 
 -- Run for 10 queries
 CALL test_nonpartitioned1(10);
+
+-- Scalability
+-- Partitioned
+-- Initialize total times
+SET @total_time_small = 0;
+SET @total_time_medium = 0;
+SET @total_time_large = 0;
+
+-- Small dataset
+SET @start = UNIX_TIMESTAMP(NOW(6));
+SELECT COUNT(*) 
+FROM sales_hash
+WHERE Region = 'Europe'
+  AND Item_Type = 'Snacks'
+  AND Order_Date BETWEEN '2023-01-01' AND '2023-01-07';
+SET @end = UNIX_TIMESTAMP(NOW(6));
+SET @total_time_small = @end - @start;
+
+-- Medium dataset
+SET @start = UNIX_TIMESTAMP(NOW(6));
+SELECT COUNT(*) 
+FROM sales_hash
+WHERE Region = 'Europe'
+  AND Item_Type = 'Snacks'
+  AND Order_Date BETWEEN '2023-01-01' AND '2023-03-31';
+SET @end = UNIX_TIMESTAMP(NOW(6));
+SET @total_time_medium = @end - @start;
+
+-- Large dataset
+SET @start = UNIX_TIMESTAMP(NOW(6));
+SELECT COUNT(*) 
+FROM sales_hash
+WHERE Region = 'Europe'
+  AND Item_Type = 'Snacks'
+  AND Order_Date BETWEEN '2023-01-01' AND '2023-12-31';
+SET @end = UNIX_TIMESTAMP(NOW(6));
+SET @total_time_large = @end - @start;
+
+-- Show results
+SELECT 
+    @total_time_small AS small_dataset_seconds,
+    @total_time_medium AS medium_dataset_seconds,
+    @total_time_large AS large_dataset_seconds;
+
+-- Non-partitioned
+-- Initialize total times
+SET @total_time_small = 0;
+SET @total_time_medium = 0;
+SET @total_time_large = 0;
+
+-- Small dataset
+SET @start = UNIX_TIMESTAMP(NOW(6));
+SELECT COUNT(*) 
+FROM sales
+WHERE Region = 'Europe'
+  AND Item_Type = 'Snacks'
+  AND Order_Date BETWEEN '2023-01-01' AND '2023-01-07';
+SET @end = UNIX_TIMESTAMP(NOW(6));
+SET @total_time_small = @end - @start;
+
+-- Medium dataset
+SET @start = UNIX_TIMESTAMP(NOW(6));
+SELECT COUNT(*) 
+FROM sales
+WHERE Region = 'Europe'
+  AND Item_Type = 'Snacks'
+  AND Order_Date BETWEEN '2023-01-01' AND '2023-03-31';
+SET @end = UNIX_TIMESTAMP(NOW(6));
+SET @total_time_medium = @end - @start;
+
+-- Large dataset
+SET @start = UNIX_TIMESTAMP(NOW(6));
+SELECT COUNT(*) 
+FROM sales
+WHERE Region = 'Europe'
+  AND Item_Type = 'Snacks'
+  AND Order_Date BETWEEN '2023-01-01' AND '2023-12-31';
+SET @end = UNIX_TIMESTAMP(NOW(6));
+SET @total_time_large = @end - @start;
+
+-- Show results
+SELECT 
+    @total_time_small AS small_dataset_seconds,
+    @total_time_medium AS medium_dataset_seconds,
+    @total_time_large AS large_dataset_seconds;
