@@ -1,1 +1,194 @@
+-- Query Execution Time
+-- Partitioned
+-- Initialize total time
+SET @total_time = 0;
 
+-- Run 1
+SET @start = UNIX_TIMESTAMP(NOW(6));
+SELECT YEAR(Order_Date) AS order_year, Region, SUM(Total_Revenue) AS total_revenue
+FROM sales_range_hash_partitioned
+where region_id = 1
+GROUP BY order_year, Region;
+SET @end = UNIX_TIMESTAMP(NOW(6));
+SET @total_time = @total_time + (@end - @start);
+
+-- Run 2
+SET @start = UNIX_TIMESTAMP(NOW(6));
+SELECT YEAR(Order_Date) AS order_year, Region, SUM(Total_Revenue) AS total_revenue
+FROM sales_range_hash_partitioned
+where region_id = 1
+GROUP BY order_year, Region;
+SET @end = UNIX_TIMESTAMP(NOW(6));
+SET @total_time = @total_time + (@end - @start);
+
+-- Run 3
+SET @start = UNIX_TIMESTAMP(NOW(6));
+SELECT YEAR(Order_Date) AS order_year, Region, SUM(Total_Revenue) AS total_revenue
+FROM sales_range_hash_partitioned
+where region_id = 1
+GROUP BY order_year, Region;
+SET @end = UNIX_TIMESTAMP(NOW(6));
+SET @total_time = @total_time + (@end - @start);
+
+-- Run 4
+SET @start = UNIX_TIMESTAMP(NOW(6));
+SELECT YEAR(Order_Date) AS order_year, Region, SUM(Total_Revenue) AS total_revenue
+FROM sales_range_hash_partitioned
+where region_id = 1
+GROUP BY order_year, Region;
+SET @end = UNIX_TIMESTAMP(NOW(6));
+SET @total_time = @total_time + (@end - @start);
+
+-- Run 5
+SET @start = UNIX_TIMESTAMP(NOW(6));
+SELECT YEAR(Order_Date) AS order_year, Region, SUM(Total_Revenue) AS total_revenue
+FROM sales_range_hash_partitioned
+where region_id = 1
+GROUP BY order_year, Region;
+SET @end = UNIX_TIMESTAMP(NOW(6));
+SET @total_time = @total_time + (@end - @start);
+
+-- Run 6
+SET @start = UNIX_TIMESTAMP(NOW(6));
+SELECT YEAR(Order_Date) AS order_year, Region, SUM(Total_Revenue) AS total_revenue
+FROM sales_range_hash_partitioned
+where region_id = 1
+GROUP BY order_year, Region;
+SET @end = UNIX_TIMESTAMP(NOW(6));
+SET @total_time = @total_time + (@end - @start);
+
+-- Run 7
+SET @start = UNIX_TIMESTAMP(NOW(6));
+SELECT YEAR(Order_Date) AS order_year, Region, SUM(Total_Revenue) AS total_revenue
+FROM sales_range_hash_partitioned
+where region_id = 1
+GROUP BY order_year, Region;
+SET @end = UNIX_TIMESTAMP(NOW(6));
+SET @total_time = @total_time + (@end - @start);
+
+-- Run 8
+SET @start = UNIX_TIMESTAMP(NOW(6));
+SELECT YEAR(Order_Date) AS order_year, Region, SUM(Total_Revenue) AS total_revenue
+FROM sales_range_hash_partitioned
+where region_id = 1
+GROUP BY order_year, Region;
+SET @end = UNIX_TIMESTAMP(NOW(6));
+SET @total_time = @total_time + (@end - @start);
+
+-- Run 9
+SET @start = UNIX_TIMESTAMP(NOW(6));
+SELECT YEAR(Order_Date) AS order_year, Region, SUM(Total_Revenue) AS total_revenue
+FROM sales_range_hash_partitioned
+where region_id = 1
+GROUP BY order_year, Region;
+SET @end = UNIX_TIMESTAMP(NOW(6));
+SET @total_time = @total_time + (@end - @start);
+
+-- Run 10
+SET @start = UNIX_TIMESTAMP(NOW(6));
+SELECT YEAR(Order_Date) AS order_year, Region, SUM(Total_Revenue) AS total_revenue
+FROM sales_range_hash_partitioned
+where region_id = 1
+GROUP BY order_year, Region;
+SET @end = UNIX_TIMESTAMP(NOW(6));
+SET @total_time = @total_time + (@end - @start);
+
+-- Calculate average
+SELECT @total_time / 10 AS avg_query_execution_time_seconds;
+
+-- Non-partitioned
+-- Initialize total time
+SET @total_time = 0;
+
+-- Run 1
+SET @start = UNIX_TIMESTAMP(NOW(6));
+SELECT YEAR(Order_Date) AS order_year, Region, SUM(Total_Revenue) AS total_revenue
+FROM sales
+where Region = 'Europe'
+GROUP BY order_year, Region;
+SET @end = UNIX_TIMESTAMP(NOW(6));
+SET @total_time = @total_time + (@end - @start);
+
+-- Run 2
+SET @start = UNIX_TIMESTAMP(NOW(6));
+SELECT YEAR(Order_Date) AS order_year, Region, SUM(Total_Revenue) AS total_revenue
+FROM sales
+where Region = 'Europe'
+GROUP BY order_year, Region;
+SET @end = UNIX_TIMESTAMP(NOW(6));
+SET @total_time = @total_time + (@end - @start);
+
+-- Run 3
+SET @start = UNIX_TIMESTAMP(NOW(6));
+SELECT YEAR(Order_Date) AS order_year, Region, SUM(Total_Revenue) AS total_revenue
+FROM sales
+where Region = 'Europe'
+GROUP BY order_year, Region;
+SET @end = UNIX_TIMESTAMP(NOW(6));
+SET @total_time = @total_time + (@end - @start);
+
+-- Run 4
+SET @start = UNIX_TIMESTAMP(NOW(6));
+SELECT YEAR(Order_Date) AS order_year, Region, SUM(Total_Revenue) AS total_revenue
+FROM sales
+where Region = 'Europe'
+GROUP BY order_year, Region;
+SET @end = UNIX_TIMESTAMP(NOW(6));
+SET @total_time = @total_time + (@end - @start);
+
+-- Run 5
+SET @start = UNIX_TIMESTAMP(NOW(6));
+SELECT YEAR(Order_Date) AS order_year, Region, SUM(Total_Revenue) AS total_revenue
+FROM sales
+where Region = 'Europe'
+GROUP BY order_year, Region;
+SET @end = UNIX_TIMESTAMP(NOW(6));
+SET @total_time = @total_time + (@end - @start);
+
+-- Run 6
+SET @start = UNIX_TIMESTAMP(NOW(6));
+SELECT YEAR(Order_Date) AS order_year, Region, SUM(Total_Revenue) AS total_revenue
+FROM sales
+where Region = 'Europe'
+GROUP BY order_year, Region;
+SET @end = UNIX_TIMESTAMP(NOW(6));
+SET @total_time = @total_time + (@end - @start);
+
+-- Run 7
+SET @start = UNIX_TIMESTAMP(NOW(6));
+SELECT YEAR(Order_Date) AS order_year, Region, SUM(Total_Revenue) AS total_revenue
+FROM sales
+where Region = 'Europe'
+GROUP BY order_year, Region;
+SET @end = UNIX_TIMESTAMP(NOW(6));
+SET @total_time = @total_time + (@end - @start);
+
+-- Run 8
+SET @start = UNIX_TIMESTAMP(NOW(6));
+SELECT YEAR(Order_Date) AS order_year, Region, SUM(Total_Revenue) AS total_revenue
+FROM sales
+where Region = 'Europe'
+GROUP BY order_year, Region;
+SET @end = UNIX_TIMESTAMP(NOW(6));
+SET @total_time = @total_time + (@end - @start);
+
+-- Run 9
+SET @start = UNIX_TIMESTAMP(NOW(6));
+SELECT YEAR(Order_Date) AS order_year, Region, SUM(Total_Revenue) AS total_revenue
+FROM sales
+where Region = 'Europe'
+GROUP BY order_year, Region;
+SET @end = UNIX_TIMESTAMP(NOW(6));
+SET @total_time = @total_time + (@end - @start);
+
+-- Run 10
+SET @start = UNIX_TIMESTAMP(NOW(6));
+SELECT YEAR(Order_Date) AS order_year, Region, SUM(Total_Revenue) AS total_revenue
+FROM sales
+where Region = 'Europe'
+GROUP BY order_year, Region;
+SET @end = UNIX_TIMESTAMP(NOW(6));
+SET @total_time = @total_time + (@end - @start);
+
+-- Calculate average
+SELECT @total_time / 10 AS avg_query_execution_time_seconds;
