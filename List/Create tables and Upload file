@@ -25,3 +25,16 @@ PARTITION BY LIST COLUMNS (Region) (
     PARTITION p_cac VALUES IN ('Central America and the Caribbean'),
     PARTITION p_na VALUES IN ('North America')
 );
+
+LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/sales_2021_2024.csv'
+INTO TABLE sales_list
+FIELDS TERMINATED BY ','
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS
+(Region, Country, Item_Type, Sales_Channel, Order_Priority,
+ @Order_Date, Order_ID, @Ship_Date, Units_Sold,
+ Unit_Price, Unit_Cost, Total_Revenue, Total_Cost, Total_Profit)
+SET
+Order_Date = STR_TO_DATE(@Order_Date, '%Y-%m-%d'),
+Ship_Date  = STR_TO_DATE(@Ship_Date, '%Y-%m-%d');
