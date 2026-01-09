@@ -235,7 +235,7 @@ DELIMITER ;
 -- Run for 10 queries
 CALL test_hash_partitioned(10);
 
--- Non-artitioned
+-- Non-partitioned
 DELIMITER $$
 
 CREATE PROCEDURE test_nonpartitioned1(IN runs INT)
