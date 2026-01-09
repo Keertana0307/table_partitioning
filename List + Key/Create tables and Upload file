@@ -77,8 +77,18 @@ SET
     Order_Date = STR_TO_DATE(@Order_Date, '%Y-%m-%d'),
     Ship_Date = STR_TO_DATE(@Ship_Date, '%Y-%m-%d');
 
--- To see how many rows exist for each order priority in each item type 
+-- to view partitions of the table
+SELECT 
+    PARTITION_NAME,
+    SUBPARTITION_NAME,
+    PARTITION_ORDINAL_POSITION,
+    TABLE_ROWS
+FROM information_schema.PARTITIONS
+WHERE TABLE_SCHEMA = 'sales_database'
+  AND TABLE_NAME = 'sales_list_key_partitioned'
+ORDER BY PARTITION_ORDINAL_POSITION;
 
+-- To see how many rows exist for each order priority in each item type 
 SELECT Item_Type, Order_Priority, COUNT(*) AS Num_Rows
 FROM sales_list_key_partitioned
 GROUP BY Item_Type, Order_Priority
