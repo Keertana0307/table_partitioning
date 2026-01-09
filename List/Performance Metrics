@@ -151,10 +151,85 @@ SET @total_time = @total_time + (@end - @start);
 
 SELECT @total_time / 10 AS avg_query_execution_time_seconds;
 
+-- Throughput
+-- Partitioned
+DELIMITER $$
+
+CREATE PROCEDURE test_list_partitioned(IN runs INT)
+BEGIN
+    DECLARE i INT DEFAULT 0;
+    DECLARE start_time DOUBLE;
+    DECLARE end_time DOUBLE;
+    DECLARE total_time DOUBLE;
+    DECLARE dummy INT;
+
+    -- Start time with microseconds
+    SET start_time = UNIX_TIMESTAMP(NOW(6));
+
+    -- Loop to run the query multiple times
+    WHILE i < runs DO
+        -- Use INTO @dummy to avoid returning rows
+        SELECT COUNT(*) INTO dummy 
+		FROM sales_list
+		WHERE Region='EUROPE' AND Sales_Channel = 'Online';
+        SET i = i + 1;
+    END WHILE;
+
+    -- End time with microseconds
+    SET end_time = UNIX_TIMESTAMP(NOW(6));
+
+    -- Total elapsed time in seconds (decimal)
+    SET total_time = end_time - start_time;
+
+    -- Show only QPS result
+    SELECT runs / total_time AS queries_per_second;
+END$$
+
+DELIMITER ;
+
+-- Run for 10 queries
+CALL test_list_partitioned(10);
+
+-- Non-partitioned
+DELIMITER $$
+
+CREATE PROCEDURE test_nonpartitioned3(IN runs INT)
+BEGIN
+    DECLARE i INT DEFAULT 0;
+    DECLARE start_time DOUBLE;
+    DECLARE end_time DOUBLE;
+    DECLARE total_time DOUBLE;
+    DECLARE dummy INT;
+
+    -- Start time with microseconds
+    SET start_time = UNIX_TIMESTAMP(NOW(6));
+
+    -- Loop to run the query multiple times
+    WHILE i < runs DO
+        -- Use INTO @dummy to avoid returning rows
+        SELECT COUNT(*) INTO dummy 
+		FROM sales
+		WHERE Region='EUROPE' AND Sales_Channel = 'Online';
+        SET i = i + 1;
+    END WHILE;
+
+    -- End time with microseconds
+    SET end_time = UNIX_TIMESTAMP(NOW(6));
+
+    -- Total elapsed time in seconds (decimal)
+    SET total_time = end_time - start_time;
+
+    -- Show only QPS result
+    SELECT runs / total_time AS queries_per_second;
+END$$
+
+DELIMITER ;
+
+-- Run for 10 queries
+CALL test_nonpartitioned3(10);
 
 -- Scalability
-
--- Partitioned table (LIST)
+-- Partitioned
 -- Initialize total time for averaging
 SET @total_time_small = 0;
 SET @total_time_medium = 0;
@@ -163,24 +238,30 @@ SET @total_time_large = 0;
 -- Small dataset: 1 week of orders
 SET @start = UNIX_TIMESTAMP(NOW(6));
 SELECT * 
-FROM sales_list_partition
-WHERE region='EUROPE' AND order_date BETWEEN '2023-01-01' AND '2023-01-07';
+FROM sales_list
+WHERE Region='EUROPE' 
+AND Sales_Channel = 'Online' 
+AND order_date BETWEEN '2023-01-01' AND '2023-01-07';
 SET @end = UNIX_TIMESTAMP(NOW(6));
 SET @total_time_small = @total_time_small + (@end - @start);
 
--- Medium dataset: 1 month of orders
+-- Medium dataset: 3 months of orders
 SET @start = UNIX_TIMESTAMP(NOW(6));
 SELECT * 
-FROM sales_list_partition
-WHERE region='EUROPE' AND order_date BETWEEN '2023-01-01' AND '2023-01-31';
+FROM sales_list
+WHERE Region='EUROPE' 
+AND Sales_Channel = 'Online' 
+AND order_date BETWEEN '2023-01-01' AND '2023-03-31';
 SET @end = UNIX_TIMESTAMP(NOW(6));
 SET @total_time_medium = @total_time_medium + (@end - @start);
 
 -- Large dataset: full year
 SET @start = UNIX_TIMESTAMP(NOW(6));
 SELECT * 
-FROM sales_list_partition
-WHERE region='EUROPE' AND order_date BETWEEN '2023-01-01' AND '2023-12-31';
+FROM sales_list
+WHERE Region='EUROPE' 
+AND Sales_Channel = 'Online' 
+AND order_date BETWEEN '2023-01-01' AND '2023-12-31';
 SET @end = UNIX_TIMESTAMP(NOW(6));
 SET @total_time_large = @total_time_large + (@end - @start);
 
@@ -190,8 +271,8 @@ SELECT
     @total_time_medium AS partitioned_medium_seconds,
     @total_time_large AS partitioned_large_seconds;
 
-
--- Non-Partitioned table (LIST)
+-- Scalability
+-- Non-partitioned
 -- Initialize total time for averaging
 SET @total_time_small = 0;
 SET @total_time_medium = 0;
@@ -200,24 +281,30 @@ SET @total_time_large = 0;
 -- Small dataset: 1 week of orders
 SET @start = UNIX_TIMESTAMP(NOW(6));
 SELECT * 
-FROM sales_non_partitioned
-WHERE region='EUROPE' AND order_date BETWEEN '2023-01-01' AND '2023-01-07';
+FROM sales
+WHERE Region='EUROPE' 
+AND Sales_Channel = 'Online' 
+AND order_date BETWEEN '2023-01-01' AND '2023-01-07';
 SET @end = UNIX_TIMESTAMP(NOW(6));
 SET @total_time_small = @total_time_small + (@end - @start);
 
--- Medium dataset: 1 month of orders
+-- Medium dataset: 3 months of orders
 SET @start = UNIX_TIMESTAMP(NOW(6));
 SELECT * 
-FROM sales_non_partitionedn
-WHERE region='EUROPE' AND order_date BETWEEN '2023-01-01' AND '2023-01-31';
+FROM sales
+WHERE Region='EUROPE' 
+AND Sales_Channel = 'Online' 
+AND order_date BETWEEN '2023-01-01' AND '2023-03-31';
 SET @end = UNIX_TIMESTAMP(NOW(6));
 SET @total_time_medium = @total_time_medium + (@end - @start);
 
 -- Large dataset: full year
 SET @start = UNIX_TIMESTAMP(NOW(6));
 SELECT * 
-FROM sales_non_partitioned
-WHERE region='EUROPE' AND order_date BETWEEN '2023-01-01' AND '2023-12-31';
+FROM sales
+WHERE Region='EUROPE' 
+AND Sales_Channel = 'Online' 
+AND order_date BETWEEN '2023-01-01' AND '2023-12-31';
 SET @end = UNIX_TIMESTAMP(NOW(6));
 SET @total_time_large = @total_time_large + (@end - @start);
 
