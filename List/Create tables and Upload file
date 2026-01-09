@@ -38,3 +38,13 @@ IGNORE 1 ROWS
 SET
 Order_Date = STR_TO_DATE(@Order_Date, '%Y-%m-%d'),
 Ship_Date  = STR_TO_DATE(@Ship_Date, '%Y-%m-%d');
+
+-- to view list partition
+SELECT 
+    PARTITION_NAME,
+    SUBPARTITION_NAME,
+    PARTITION_ORDINAL_POSITION,
+    TABLE_ROWS
+FROM information_schema.PARTITIONS
+WHERE TABLE_NAME = 'sales_list'
+ORDER BY PARTITION_ORDINAL_POSITION;
