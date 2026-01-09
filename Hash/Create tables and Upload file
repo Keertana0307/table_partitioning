@@ -1,3 +1,4 @@
+
 CREATE TABLE sales_hash (
     id BIGINT NOT NULL AUTO_INCREMENT,
     Region VARCHAR(50),
@@ -14,24 +15,12 @@ CREATE TABLE sales_hash (
     Total_Revenue DECIMAL(15,2),
     Total_Cost DECIMAL(15,2),
     Total_Profit DECIMAL(15,2),
-    PRIMARY KEY (ID, Order_ID)
+    PRIMARY KEY (id)
 )
 
-PARTITION BY HASH (Order_ID)
-PARTITIONS 6;
+PARTITION BY HASH(id)
+PARTITIONS 8;
 
-LOAD DATA INFILE 'C:\Users\NUHAA\Downloads\sales_2021_2024.csv''
-INTO TABLE sales_source
-FIELDS TERMINATED BY ','
-ENCLOSED BY '"'
-LINES TERMINATED BY '\n'
-IGNORE 1 ROWS
-(Region, Country, Item_Type, Sales_Channel, Order_Priority,
- @Order_Date, Order_ID, @Ship_Date, Units_Sold,
- Unit_Price, Unit_Cost, Total_Revenue, Total_Cost, Total_Profit)
-SET
- Order_Date = STR_TO_DATE(@Order_Date, '%m/%d/%Y'),
- Ship_Date  = STR_TO_DATE(@Ship_Date, '%m/%d/%Y');
 
 
 
