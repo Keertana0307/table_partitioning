@@ -34,12 +34,13 @@ SET
 Order_Date = STR_TO_DATE(@Order_Date, '%Y-%m-%d'),
 Ship_Date  = STR_TO_DATE(@Ship_Date, '%Y-%m-%d');
 
--- to view partitions of a table
+-- to view partitions of the table
 SELECT 
     PARTITION_NAME,
     SUBPARTITION_NAME,
     PARTITION_ORDINAL_POSITION,
     TABLE_ROWS
 FROM information_schema.PARTITIONS
-WHERE TABLE_NAME = 'sales_hash'
+WHERE TABLE_SCHEMA = 'sales_database'
+  AND TABLE_NAME = 'sales_hash'
 ORDER BY PARTITION_ORDINAL_POSITION;
