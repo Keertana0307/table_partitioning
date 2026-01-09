@@ -232,3 +232,75 @@ DELIMITER ;
 -- Run for 10 queries
 CALL test_nonpartitioned2(10);
 
+-- Scalability
+-- Partitioned
+-- Initialize total times
+SET @total_time_small = 0;
+SET @total_time_medium = 0;
+SET @total_time_large = 0;
+
+-- Small dataset: 1 wwek
+SET @start = UNIX_TIMESTAMP(NOW(6));
+SELECT COUNT(*) 
+FROM sales_range
+WHERE region='Europe' AND order_date BETWEEN '2023-01-01' AND '2023-01-07';
+SET @end = UNIX_TIMESTAMP(NOW(6));
+SET @total_time_small = @end - @start;
+
+-- Medium dataset: 3 months
+SET @start = UNIX_TIMESTAMP(NOW(6));
+SELECT COUNT(*) 
+FROM sales_range
+WHERE region='Europe' AND order_date BETWEEN '2023-01-01' AND '2023-03-31';
+SET @end = UNIX_TIMESTAMP(NOW(6));
+SET @total_time_medium = @end - @start;
+
+-- Large dataset: full year
+SET @start = UNIX_TIMESTAMP(NOW(6));
+SELECT COUNT(*) 
+FROM sales_range
+WHERE region='Europe' AND order_date BETWEEN '2023-01-01' AND '2023-12-31';
+SET @end = UNIX_TIMESTAMP(NOW(6));
+SET @total_time_large = @end - @start;
+
+-- Show results
+SELECT 
+    @total_time_small AS small_dataset_seconds,
+    @total_time_medium AS medium_dataset_seconds,
+    @total_time_large AS large_dataset_seconds;
+
+-- Non-partitioned
+-- Initialize total times
+SET @total_time_small = 0;
+SET @total_time_medium = 0;
+SET @total_time_large = 0;
+
+-- Small dataset: 1 wwek
+SET @start = UNIX_TIMESTAMP(NOW(6));
+SELECT COUNT(*) 
+FROM sales
+WHERE region='Europe' AND order_date BETWEEN '2023-01-01' AND '2023-01-07';
+SET @end = UNIX_TIMESTAMP(NOW(6));
+SET @total_time_small = @end - @start;
+
+-- Medium dataset: 3 months
+SET @start = UNIX_TIMESTAMP(NOW(6));
+SELECT COUNT(*) 
+FROM salese
+WHERE region='Europe' AND order_date BETWEEN '2023-01-01' AND '2023-03-31';
+SET @end = UNIX_TIMESTAMP(NOW(6));
+SET @total_time_medium = @end - @start;
+
+-- Large dataset: full year
+SET @start = UNIX_TIMESTAMP(NOW(6));
+SELECT COUNT(*) 
+FROM sales
+WHERE region='Europe' AND order_date BETWEEN '2023-01-01' AND '2023-12-31';
+SET @end = UNIX_TIMESTAMP(NOW(6));
+SET @total_time_large = @end - @start;
+
+-- Show results
+SELECT 
+    @total_time_small AS small_dataset_seconds,
+    @total_time_medium AS medium_dataset_seconds,
+    @total_time_large AS large_dataset_seconds;
