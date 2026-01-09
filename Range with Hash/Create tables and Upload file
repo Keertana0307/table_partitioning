@@ -14,7 +14,8 @@ CREATE TABLE sales_range_hash_partitioned (
     Unit_Cost DECIMAL(10,2),
     Total_Revenue DECIMAL(15,2),
     Total_Cost DECIMAL(15,2),
-    Total_Profit DECIMAL(15,2)
+    Total_Profit DECIMAL(15,2),
+    PRIMARY KEY (id, Order_Date, region_id)
 )
 PARTITION BY RANGE (YEAR(Order_Date)) -- Range on year
 SUBPARTITION BY HASH (region_id)     -- Hash on region_id
@@ -51,4 +52,14 @@ Region_ID = CASE Region
     ELSE 0  -- for unknown/other regions
 END;
 
+-- to view the partition table
+SELECT 
+    PARTITION_NAME,
+    SUBPARTITION_NAME,
+    PARTITION_ORDINAL_POSITION,
+    TABLE_ROWS
+FROM information_schema.PARTITIONS
+WHERE TABLE_SCHEMA = 'sales_database'
+  AND TABLE_NAME = 'sales_range_hash_partitioned'
+ORDER BY PARTITION_ORDINAL_POSITION;
 
