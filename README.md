@@ -1,7 +1,7 @@
 # Comparing Different Strategies for Efficient Storage and Querying in Large Database
 **Objective**: 
 - Evaluate how MySQL partitioning methods manage and query large datasets efficiently.
-- Demonstrate how the same large dataset is stored in MongoDB.
+- Demonstrate how the same large dataset is stored in MongoDB and compare query performance with indexing versus without indexing.
 - Compare these two strategies in terms of data storage and query handling.
 
 This repository contains the implementation different table partitioning methods using MySQL and implementation of storing and querying using MongoDB.
