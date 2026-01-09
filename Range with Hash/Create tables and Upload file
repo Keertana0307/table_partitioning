@@ -1,5 +1,6 @@
 CREATE TABLE sales_range_hash_partitioned (
-	  Region VARCHAR(255),
+	id BIGINT NOT NULL AUTO_INCREMENT,
+	Region VARCHAR(255),
     region_id TINYINT NOT NULL,
     Country VARCHAR(255),
     Item_Type VARCHAR(255),
