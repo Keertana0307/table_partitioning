@@ -1,4 +1,3 @@
-
 CREATE TABLE sales_hash (
     id BIGINT NOT NULL AUTO_INCREMENT,
     Region VARCHAR(50),
@@ -21,25 +20,26 @@ CREATE TABLE sales_hash (
 PARTITION BY HASH(id)
 PARTITIONS 8;
 
+-- upload data
+LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/sales_2021_2024.csv'
+INTO TABLE sales_hash
+FIELDS TERMINATED BY ','
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS
+(Region, Country, Item_Type, Sales_Channel, Order_Priority,
+ @Order_Date, Order_ID, @Ship_Date, Units_Sold,
+ Unit_Price, Unit_Cost, Total_Revenue, Total_Cost, Total_Profit)
+SET
+Order_Date = STR_TO_DATE(@Order_Date, '%Y-%m-%d'),
+Ship_Date  = STR_TO_DATE(@Ship_Date, '%Y-%m-%d');
 
-
-
-
-INSERT INTO sales_hash
-SELECT * FROM sales_source;
-
-SELECT
+-- to view partitions of a table
+SELECT 
     PARTITION_NAME,
+    SUBPARTITION_NAME,
+    PARTITION_ORDINAL_POSITION,
     TABLE_ROWS
-FROM INFORMATION_SCHEMA.PARTITIONS
-WHERE TABLE_NAME = 'sales_hash';
-
-EXPLAIN ANALYZE
-SELECT *
-FROM sales_hash
-WHERE Order_ID = 7734891;
-
-EXPLAIN ANALYZE
-SELECT *
-FROM sales_source
-WHERE Order_ID = 7734891;
+FROM information_schema.PARTITIONS
+WHERE TABLE_NAME = 'sales_hash'
+ORDER BY PARTITION_ORDINAL_POSITION;
