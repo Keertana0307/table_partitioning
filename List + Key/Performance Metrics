@@ -84,7 +84,7 @@ SET @end = UNIX_TIMESTAMP(NOW(6));
 SET @total_time = @total_time + (@end - @start);
 
 -- Calculate average
-SELECT @total_time / 10 AS avg_access_time_seconds;
+SELECT @total_time / 10 AS avg_time_seconds;
 
 
 -- Non-partitioned
@@ -172,7 +172,7 @@ SET @end = UNIX_TIMESTAMP(NOW(6));
 SET @total_time = @total_time + (@end - @start);
 
 -- Calculate average
-SELECT @total_time / 10 AS avg_access_time_seconds;
+SELECT @total_time / 10 AS avg_time_seconds;
 
 -- Throughput
 -- Partitioned
@@ -213,8 +213,6 @@ DELIMITER ;
 
 -- Run for 10 queries
 CALL test_listkey_partitioned(10);
-
-
 
 -- Non-partitioned
 DELIMITER $$
