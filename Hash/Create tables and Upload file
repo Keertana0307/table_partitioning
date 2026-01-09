@@ -1,4 +1,5 @@
 CREATE TABLE sales_hash (
+    id BIGINT NOT NULL AUTO_INCREMENT,
     Region VARCHAR(50),
     Country VARCHAR(50),
     Item_Type VARCHAR(50),
@@ -13,7 +14,7 @@ CREATE TABLE sales_hash (
     Total_Revenue DECIMAL(15,2),
     Total_Cost DECIMAL(15,2),
     Total_Profit DECIMAL(15,2),
-    PRIMARY KEY (Order_ID)
+    PRIMARY KEY (ID, Order_ID)
 )
 
 PARTITION BY HASH (Order_ID)
