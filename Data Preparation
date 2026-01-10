@@ -1,0 +1,43 @@
+# Using Google Collab
+# Replace 'Order Date' with the exact column name
+df['Order Date'] = pd.to_datetime(df['Order Date'], errors='coerce')
+print(df['Order Date'].head())
+
+df['Ship Date'] = pd.to_datetime(df['Ship Date'], errors='coerce')
+print(df['Ship Date'].head())
+
+mask = (df['Order Date'].dt.year >= 2021) & (df['Order Date'].dt.year <= 2024)
+filtered_df = df.loc[mask]
+print("Number of rows from 2021 to 2024:", filtered_df.shape[0])
+# Output-- Number of rows: 1726733
+
+from google.colab import files
+# Save filtered rows to a CSV in the Colab VM
+filtered_df.to_csv("sales_2021_2024.csv", index=False)
+# Download the file to your local computer
+files.download("sales_2021_2024.csv")
+
+
+import os
+import gdown
+# DOWNLOAD FILE (2021 - 2024) FROM GOOGLE DRIVE
+file_id = "1DaIqRc1FhNUAM0k9X3WC0ylbi2tevkDw"
+filename = "sales_2021_2024.csv"
+if not os.path.exists(filename):
+    print(f"Downloading '{filename}' from Google Drive...")
+    url = f"https://drive.google.com/uc?id={file_id}"
+    gdown.download(url, filename, quiet=False)
+else:
+    print(f"'{filename}' already exists locally. Skipping download.")
+
+
+# Check Number of Rows
+import pandas as pd
+df = pd.read_csv("sales_2021_2024.csv")
+print("Number of rows:", len(df))
+# Output-- Number of rows: 1726733
+
+
+# Check Columns
+print(df.columns.tolist())
+# Output -- ['Region', 'Country', 'Item Type', 'Sales Channel', 'Order Priority', 'Order Date', 'Order ID', 'Ship Date', 'Units Sold', 'Unit Price', 'Unit Cost', 'Total Revenue', 'Total Cost', 'Total Profit']
