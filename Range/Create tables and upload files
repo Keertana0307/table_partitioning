@@ -46,5 +46,5 @@ SELECT
     TABLE_ROWS
 FROM information_schema.PARTITIONS
 WHERE TABLE_SCHEMA = 'sales_database'
-  AND TABLE_NAME = 'sales_hash'
+  AND TABLE_NAME = 'sales_range'
 ORDER BY PARTITION_ORDINAL_POSITION;
