@@ -1,0 +1,54 @@
+// Single-field Index (Order ID):
+db.salesdb.createIndex({ "Order ID": 1 }, { unique: true })
+MongoServerError[DuplicateKey]: Index build failed: 96b58e7b-6fe9-4d63-8f2c-a1721c725af0: Collection dbs_final_assessment.salesdb ( 2153abcd-71c5-4ff5-aa51-88593b0cd62d ) :: caused by :: E11000 duplicate key error collection: dbs_final_assessment.salesdb index: Order ID_1 dup key: { Order ID: 100001609 }
+dbs_final_assessment>
+
+//Note: The dataset contains duplicate Order ID values but unique index enforces the rule that each value in this field must appear only once
+
+// Find the duplicate ids
+dbs_final_assessment> db.salesdb.getIndexes()
+[
+  { v: 2, key: { _id: 1 }, name: '_id_' },
+  {
+    v: 2,
+    key: { Region: 1, 'Item Type': 1 },
+    name: 'Region_1_Item Type_1'
+  }
+]
+dbs_final_assessment> db.salesdb.aggregate([
+...   { $group: { _id: "$Order ID", count: { $sum: 1 } } },
+...   { $match: { count: { $gt: 1 } } },
+...   { $limit: 5 }
+... ])
+...
+
+[
+  { _id: 328530967, count: 6 },
+  { _id: 433647382, count: 4 },
+  { _id: 847080934, count: 6 },
+  { _id: 736235320, count: 6 },
+  { _id: 278959453, count: 2 }
+]
+// Notes: Dataset contains duplicates and order id is not a true primary key. Although Order ID appears to be a candidate key, exploratory analysis revealed duplicate values in the dataset. Therefore, enforcing a unique index was not feasible without prior data cleansing.
+//Create a NON-UNIQUE index
+dbs_final_assessment> db.salesdb.createIndex({ "Order ID": 1 })
+Order ID_1
+
+//Compound Index (Region + Item Type):
+dbs_final_assessment> db.salesdb.createIndex({ "Region": 1, "Item Type": 1 })
+db.salesdb.createIndex({ "Region": 1, "Item Type": 1 })
+
+//Verify Indexes
+dbs_final_assessment> db.salesdb.createIndex({ "Order ID": 1 })
+Order ID_1
+dbs_final_assessment> db.salesdb.getIndexes()
+[
+  { v: 2, key: { _id: 1 }, name: '_id_' },
+  {
+    v: 2,
+    key: { Region: 1, 'Item Type': 1 },
+    name: 'Region_1_Item Type_1'
+  },
+  { v: 2, key: { 'Order ID': 1 }, name: 'Order ID_1' }
+]
+
