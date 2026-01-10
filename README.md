@@ -9,6 +9,9 @@ This repository contains the data preparation using Google Collab, implementatio
 ## Dataset Link:
 - https://www.kaggle.com/datasets/weitat/sample-sales
 
+## Google Collab Link:
+- https://colab.research.google.com/drive/11vfYd3t7zwYbzSn4XdMqlYeUlAOULHbV?usp=sharing
+
 ## Partitioning Methods using MySQL
 ### 1. Range Partitioning
 
