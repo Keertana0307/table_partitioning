@@ -1,0 +1,71 @@
+// Dataset Import
+Microsoft Windows [Version 10.0.26100.7462]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\wenli>mongoimport --version
+mongoimport version: 100.14.0
+git version: d909d040daa15cc1356071e835e4bac31a96dce3
+Go version: go1.24.0
+   os: windows
+   arch: amd64
+   compiler: gc
+
+C:\Users\wenli>mongoimport --db dbs_final_assessment \mongoimport --db dbs_final_assessment \--type csv \--file "C:\ProgramData\MySQL\MySQL Server 8.0\Uploads\sales_2021_2024.csv" \--headerline
+2026-01-10T00:59:00.819+0800    error parsing command line options: error parsing positional arguments: provide only one file name and only one MongoDB connection string. Connection strings must begin with mongodb:// or mongodb+srv:// schemes
+2026-01-10T00:59:00.904+0800    try 'mongoimport --help' for more information
+
+C:\Users\wenli>mongoimport --db dbs_final_assessment --collection salesdb --type csv --file "C:\ProgramData\MySQL\MySQL Server 8.0\Uploads\sales_2021_2024.csv" --headerline
+2026-01-10T00:59:38.385+0800    connected to: mongodb://localhost/
+2026-01-10T00:59:41.386+0800    [#.......................] dbs_final_assessment.salesdb     14.7MB/206MB (7.1%)
+2026-01-10T00:59:44.385+0800    [###.....................] dbs_final_assessment.salesdb     32.9MB/206MB (16.0%)
+2026-01-10T00:59:47.385+0800    [#####...................] dbs_final_assessment.salesdb     50.7MB/206MB (24.6%)
+2026-01-10T00:59:50.385+0800    [########................] dbs_final_assessment.salesdb     70.3MB/206MB (34.1%)
+2026-01-10T00:59:53.386+0800    [##########..............] dbs_final_assessment.salesdb     89.2MB/206MB (43.3%)
+2026-01-10T00:59:56.386+0800    [############............] dbs_final_assessment.salesdb     108MB/206MB (52.5%)
+2026-01-10T00:59:59.386+0800    [##############..........] dbs_final_assessment.salesdb     127MB/206MB (61.5%)
+2026-01-10T01:00:02.385+0800    [################........] dbs_final_assessment.salesdb     146MB/206MB (70.8%)
+2026-01-10T01:00:05.385+0800    [###################.....] dbs_final_assessment.salesdb     163MB/206MB (79.3%)
+2026-01-10T01:00:08.386+0800    [#####################...] dbs_final_assessment.salesdb     182MB/206MB (88.5%)
+2026-01-10T01:00:11.385+0800    [#######################.] dbs_final_assessment.salesdb     200MB/206MB (97.0%)
+2026-01-10T01:00:12.419+0800    [########################] dbs_final_assessment.salesdb     206MB/206MB (100.0%)
+2026-01-10T01:00:12.420+0800    1726733 document(s) imported successfully. 0 document(s) failed to import.
+
+// Open Mongo Shell
+C:\Users\wenli>mongosh
+Current Mongosh Log ID: 6961d7f87aa35290911e2620
+Connecting to:          mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.5.10
+Using MongoDB:          8.2.3
+Using Mongosh:          2.5.10
+
+For mongosh info see: https://www.mongodb.com/docs/mongodb-shell/
+------
+   The server generated these startup warnings when booting
+   2026-01-09T21:01:56.680+08:00: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+------
+
+//Switch to Database
+test> use dbs_final_assessment
+switched to db dbs_final_assessment
+
+//Verify the import:
+dbs_final_assessment> db.salesdb.count()      // total documents
+... db.salesdb.findOne()    // sample document
+...
+DeprecationWarning: Collection.count() is deprecated. Use countDocuments or estimatedDocumentCount.
+{
+  _id: ObjectId('6961088e0670df4e506fb8b4'),
+  Region: 'Middle East and North Africa',
+  Country: 'Oman',
+  'Item Type': 'Cereal',
+  'Sales Channel': 'Offline',
+  'Order Priority': 'H',
+  'Order Date': ISODate('2023-04-26T00:00:00.000Z'),
+  'Order ID': 970755660,
+  'Ship Date': ISODate('2023-06-02T00:00:00.000Z'),
+  'Units Sold': 7027,
+  'Unit Price': 205.7,
+  'Unit Cost': 117.11,
+  'Total Revenue': 1445453.9,
+  'Total Cost': 822931.97,
+  'Total Profit': 622521.93
+}
