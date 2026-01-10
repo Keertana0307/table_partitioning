@@ -1,0 +1,356 @@
+// Query by Order ID:
+dbs_final_assessment> db.salesdb.find({ "Order ID": 213974893 }).explain("executionStats")
+{
+  explainVersion: '1',
+  queryPlanner: {
+    namespace: 'dbs_final_assessment.salesdb',
+    parsedQuery: { 'Order ID': { '$eq': 213974893 } },
+    indexFilterSet: false,
+    queryHash: 'D9D77831',
+    planCacheShapeHash: 'D9D77831',
+    planCacheKey: 'E41160D0',
+    optimizationTimeMillis: 12,
+    maxIndexedOrSolutionsReached: false,
+    maxIndexedAndSolutionsReached: false,
+    maxScansToExplodeReached: false,
+    prunedSimilarIndexes: false,
+    winningPlan: {
+      isCached: false,
+      stage: 'FETCH',
+      inputStage: {
+        stage: 'IXSCAN',
+        keyPattern: { 'Order ID': 1 },
+        indexName: 'Order ID_1',
+        isMultiKey: false,
+        multiKeyPaths: { 'Order ID': [] },
+        isUnique: false,
+        isSparse: false,
+        isPartial: false,
+        indexVersion: 2,
+        direction: 'forward',
+        indexBounds: { 'Order ID': [ '[213974893, 213974893]' ] }
+      }
+    },
+    rejectedPlans: []
+  },
+  executionStats: {
+    executionSuccess: true,
+    nReturned: 4,
+    executionTimeMillis: 28,
+    totalKeysExamined: 4,
+    totalDocsExamined: 4,
+    executionStages: {
+      isCached: false,
+      stage: 'FETCH',
+      nReturned: 4,
+      executionTimeMillisEstimate: 10,
+      works: 5,
+      advanced: 4,
+      needTime: 0,
+      needYield: 0,
+      saveState: 0,
+      restoreState: 0,
+      isEOF: 1,
+      docsExamined: 4,
+      alreadyHasObj: 0,
+      inputStage: {
+        stage: 'IXSCAN',
+        nReturned: 4,
+        executionTimeMillisEstimate: 10,
+        works: 5,
+        advanced: 4,
+        needTime: 0,
+        needYield: 0,
+        saveState: 0,
+        restoreState: 0,
+        isEOF: 1,
+        keyPattern: { 'Order ID': 1 },
+        indexName: 'Order ID_1',
+        isMultiKey: false,
+        multiKeyPaths: { 'Order ID': [] },
+        isUnique: false,
+        isSparse: false,
+        isPartial: false,
+        indexVersion: 2,
+        direction: 'forward',
+        indexBounds: { 'Order ID': [ '[213974893, 213974893]' ] },
+        keysExamined: 4,
+        seeks: 1,
+        dupsTested: 0,
+        dupsDropped: 0
+      }
+    }
+  },
+  queryShapeHash: 'B112F055D8B7F246BED3EE4621DB0F0E4904C2BCFE0783A5B742C5FD805FDE3F',
+  command: {
+    find: 'salesdb',
+    filter: { 'Order ID': 213974893 },
+    '$db': 'dbs_final_assessment'
+  },
+  serverInfo: {
+    host: 'LAPTOP-N5SMGUI8',
+    port: 27017,
+    version: '8.2.3',
+    gitVersion: '36f41c9c30a2f13f834d033ba03c3463c891fb01'
+  },
+  serverParameters: {
+    internalQueryFacetBufferSizeBytes: 104857600,
+    internalQueryFacetMaxOutputDocSizeBytes: 104857600,
+    internalLookupStageIntermediateDocumentMaxSizeBytes: 104857600,
+    internalDocumentSourceGroupMaxMemoryBytes: 104857600,
+    internalQueryMaxBlockingSortMemoryUsageBytes: 104857600,
+    internalQueryProhibitBlockingMergeOnMongoS: 0,
+    internalQueryMaxAddToSetBytes: 104857600,
+    internalDocumentSourceSetWindowFieldsMaxMemoryBytes: 104857600,
+    internalQueryFrameworkControl: 'trySbeRestricted',
+    internalQueryPlannerIgnoreIndexWithCollationForRegex: 1
+  },
+  ok: 1
+}
+dbs_final_assessment>
+
+// Query By Region
+
+dbs_final_assessment> db.salesdb.find({ "Region": "Middle East and North Africa" }).explain("executionStats")
+{
+  explainVersion: '1',
+  queryPlanner: {
+    namespace: 'dbs_final_assessment.salesdb',
+    parsedQuery: { Region: { '$eq': 'Middle East and North Africa' } },
+    indexFilterSet: false,
+    queryHash: 'FF4EC0A2',
+    planCacheShapeHash: 'FF4EC0A2',
+    planCacheKey: '0BB63CFA',
+    optimizationTimeMillis: 0,
+    maxIndexedOrSolutionsReached: false,
+    maxIndexedAndSolutionsReached: false,
+    maxScansToExplodeReached: false,
+    prunedSimilarIndexes: false,
+    winningPlan: {
+      isCached: false,
+      stage: 'FETCH',
+      inputStage: {
+        stage: 'IXSCAN',
+        keyPattern: { Region: 1, 'Item Type': 1 },
+        indexName: 'Region_1_Item Type_1',
+        isMultiKey: false,
+        multiKeyPaths: { Region: [], 'Item Type': [] },
+        isUnique: false,
+        isSparse: false,
+        isPartial: false,
+        indexVersion: 2,
+        direction: 'forward',
+        indexBounds: {
+          Region: [
+            '["Middle East and North Africa", "Middle East and North Africa"]'
+          ],
+          'Item Type': [ '[MinKey, MaxKey]' ]
+        }
+      }
+    },
+    rejectedPlans: []
+  },
+  executionStats: {
+    executionSuccess: true,
+    nReturned: 428632,
+    executionTimeMillis: 18766,
+    totalKeysExamined: 428632,
+    totalDocsExamined: 428632,
+    executionStages: {
+      isCached: false,
+      stage: 'FETCH',
+      nReturned: 428632,
+      executionTimeMillisEstimate: 18266,
+      works: 428633,
+      advanced: 428632,
+      needTime: 0,
+      needYield: 0,
+      saveState: 1064,
+      restoreState: 1064,
+      isEOF: 1,
+      docsExamined: 428632,
+      alreadyHasObj: 0,
+      inputStage: {
+        stage: 'IXSCAN',
+        nReturned: 428632,
+        executionTimeMillisEstimate: 910,
+        works: 428633,
+        advanced: 428632,
+        needTime: 0,
+        needYield: 0,
+        saveState: 1064,
+        restoreState: 1064,
+        isEOF: 1,
+        keyPattern: { Region: 1, 'Item Type': 1 },
+        indexName: 'Region_1_Item Type_1',
+        isMultiKey: false,
+        multiKeyPaths: { Region: [], 'Item Type': [] },
+        isUnique: false,
+        isSparse: false,
+        isPartial: false,
+        indexVersion: 2,
+        direction: 'forward',
+        indexBounds: {
+          Region: [
+            '["Middle East and North Africa", "Middle East and North Africa"]'
+          ],
+          'Item Type': [ '[MinKey, MaxKey]' ]
+        },
+        keysExamined: 428632,
+        seeks: 1,
+        dupsTested: 0,
+        dupsDropped: 0
+      }
+    }
+  },
+  queryShapeHash: '1A07BC4FD02E8886FBC16BE27729DC0F378E1583AA554D7094EDECEC85791761',
+  command: {
+    find: 'salesdb',
+    filter: { Region: 'Middle East and North Africa' },
+    '$db': 'dbs_final_assessment'
+  },
+  serverInfo: {
+    host: 'LAPTOP-N5SMGUI8',
+    port: 27017,
+    version: '8.2.3',
+    gitVersion: '36f41c9c30a2f13f834d033ba03c3463c891fb01'
+  },
+  serverParameters: {
+    internalQueryFacetBufferSizeBytes: 104857600,
+    internalQueryFacetMaxOutputDocSizeBytes: 104857600,
+    internalLookupStageIntermediateDocumentMaxSizeBytes: 104857600,
+    internalDocumentSourceGroupMaxMemoryBytes: 104857600,
+    internalQueryMaxBlockingSortMemoryUsageBytes: 104857600,
+    internalQueryProhibitBlockingMergeOnMongoS: 0,
+    internalQueryMaxAddToSetBytes: 104857600,
+    internalDocumentSourceSetWindowFieldsMaxMemoryBytes: 104857600,
+    internalQueryFrameworkControl: 'trySbeRestricted',
+    internalQueryPlannerIgnoreIndexWithCollationForRegex: 1
+  },
+  ok: 1
+}
+// Query by Region + Item Type:
+dbs_final_assessment> db.salesdb.find({ "Region": "Middle East and North Africa", "Item Type": "Cereal" }).explain("executionStats")
+{
+  explainVersion: '1',
+  queryPlanner: {
+    namespace: 'dbs_final_assessment.salesdb',
+    parsedQuery: {
+      '$and': [
+        { 'Item Type': { '$eq': 'Cereal' } },
+        { Region: { '$eq': 'Middle East and North Africa' } }
+      ]
+    },
+    indexFilterSet: false,
+    queryHash: 'FEB0D8EE',
+    planCacheShapeHash: 'FEB0D8EE',
+    planCacheKey: '32B9CD21',
+    optimizationTimeMillis: 12,
+    maxIndexedOrSolutionsReached: false,
+    maxIndexedAndSolutionsReached: false,
+    maxScansToExplodeReached: false,
+    prunedSimilarIndexes: false,
+    winningPlan: {
+      isCached: false,
+      stage: 'FETCH',
+      inputStage: {
+        stage: 'IXSCAN',
+        keyPattern: { Region: 1, 'Item Type': 1 },
+        indexName: 'Region_1_Item Type_1',
+        isMultiKey: false,
+        multiKeyPaths: { Region: [], 'Item Type': [] },
+        isUnique: false,
+        isSparse: false,
+        isPartial: false,
+        indexVersion: 2,
+        direction: 'forward',
+        indexBounds: {
+          Region: [
+            '["Middle East and North Africa", "Middle East and North Africa"]'
+          ],
+          'Item Type': [ '["Cereal", "Cereal"]' ]
+        }
+      }
+    },
+    rejectedPlans: []
+  },
+  executionStats: {
+    executionSuccess: true,
+    nReturned: 35740,
+    executionTimeMillis: 6432,
+    totalKeysExamined: 35740,
+    totalDocsExamined: 35740,
+    executionStages: {
+      isCached: false,
+      stage: 'FETCH',
+      nReturned: 35740,
+      executionTimeMillisEstimate: 6246,
+      works: 35741,
+      advanced: 35740,
+      needTime: 0,
+      needYield: 0,
+      saveState: 349,
+      restoreState: 349,
+      isEOF: 1,
+      docsExamined: 35740,
+      alreadyHasObj: 0,
+      inputStage: {
+        stage: 'IXSCAN',
+        nReturned: 35740,
+        executionTimeMillisEstimate: 122,
+        works: 35741,
+        advanced: 35740,
+        needTime: 0,
+        needYield: 0,
+        saveState: 349,
+        restoreState: 349,
+        isEOF: 1,
+        keyPattern: { Region: 1, 'Item Type': 1 },
+        indexName: 'Region_1_Item Type_1',
+        isMultiKey: false,
+        multiKeyPaths: { Region: [], 'Item Type': [] },
+        isUnique: false,
+        isSparse: false,
+        isPartial: false,
+        indexVersion: 2,
+        direction: 'forward',
+        indexBounds: {
+          Region: [
+            '["Middle East and North Africa", "Middle East and North Africa"]'
+          ],
+          'Item Type': [ '["Cereal", "Cereal"]' ]
+        },
+        keysExamined: 35740,
+        seeks: 1,
+        dupsTested: 0,
+        dupsDropped: 0
+      }
+    }
+  },
+  queryShapeHash: '5EFCB81C54A46A085C98FAF89E9E699A37E472C90405BB0DD08405690B8AA693',
+  command: {
+    find: 'salesdb',
+    filter: { Region: 'Middle East and North Africa', 'Item Type': 'Cereal' },
+    '$db': 'dbs_final_assessment'
+  },
+  serverInfo: {
+    host: 'LAPTOP-N5SMGUI8',
+    port: 27017,
+    version: '8.2.3',
+    gitVersion: '36f41c9c30a2f13f834d033ba03c3463c891fb01'
+  },
+  serverParameters: {
+    internalQueryFacetBufferSizeBytes: 104857600,
+    internalQueryFacetMaxOutputDocSizeBytes: 104857600,
+    internalLookupStageIntermediateDocumentMaxSizeBytes: 104857600,
+    internalDocumentSourceGroupMaxMemoryBytes: 104857600,
+    internalQueryMaxBlockingSortMemoryUsageBytes: 104857600,
+    internalQueryProhibitBlockingMergeOnMongoS: 0,
+    internalQueryMaxAddToSetBytes: 104857600,
+    internalDocumentSourceSetWindowFieldsMaxMemoryBytes: 104857600,
+    internalQueryFrameworkControl: 'trySbeRestricted',
+    internalQueryPlannerIgnoreIndexWithCollationForRegex: 1
+  },
+  ok: 1
+}
+dbs_final_assessment>
