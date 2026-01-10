@@ -1,1 +1,64 @@
+CREATE TABLE sales_range_hash_partitioned (
+	id BIGINT NOT NULL AUTO_INCREMENT,
+	Region VARCHAR(255),
+    region_id TINYINT NOT NULL,
+    Country VARCHAR(255),
+    Item_Type VARCHAR(255),
+    Sales_Channel VARCHAR(255),
+    Order_Priority CHAR(1),
+    Order_Date DATE,
+    Order_ID BIGINT,
+    Ship_Date DATE,
+    Units_Sold INT,
+    Unit_Price DECIMAL(10,2),
+    Unit_Cost DECIMAL(10,2),
+    Total_Revenue DECIMAL(15,2),
+    Total_Cost DECIMAL(15,2),
+    Total_Profit DECIMAL(15,2),
+    PRIMARY KEY (id, Order_Date, region_id)
+)
+PARTITION BY RANGE (YEAR(Order_Date)) -- Range on year
+SUBPARTITION BY HASH (region_id)     -- Hash on region_id
+SUBPARTITIONS 5
+(
+    PARTITION p2021 VALUES LESS THAN (2022),
+    PARTITION p2022 VALUES LESS THAN (2023),
+    PARTITION p2023 VALUES LESS THAN (2024),
+    PARTITION p2024 VALUES LESS THAN (2025),
+    PARTITION p_future VALUES LESS THAN MAXVALUE
+);
 
+
+LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/sales_2021_2024.csv'
+INTO TABLE sales_range_hash_partitioned
+FIELDS TERMINATED BY ','
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS
+(Region, Country, Item_Type, Sales_Channel, Order_Priority,
+ @Order_Date, Order_ID, @Ship_Date, Units_Sold,
+ Unit_Price, Unit_Cost, Total_Revenue, Total_Cost, Total_Profit)
+SET
+Order_Date = STR_TO_DATE(@Order_Date, '%Y-%m-%d'),
+Ship_Date  = STR_TO_DATE(@Ship_Date, '%Y-%m-%d'),
+Region_ID = CASE Region
+    WHEN 'Europe' THEN 1
+    WHEN 'Sub-Saharan Africa' THEN 2
+    WHEN 'Middle East and North Africa' THEN 3
+    WHEN 'Australia and Oceania' THEN 4
+    WHEN 'Central America and the Caribbean' THEN 5
+    WHEN 'North America' THEN 6
+    WHEN 'Asia' THEN 7
+    ELSE 0  -- for unknown/other regions
+END;
+
+-- to view the partition table
+SELECT 
+    PARTITION_NAME,
+    SUBPARTITION_NAME,
+    PARTITION_ORDINAL_POSITION,
+    TABLE_ROWS
+FROM information_schema.PARTITIONS
+WHERE TABLE_SCHEMA = 'sales_database'
+  AND TABLE_NAME = 'sales_range_hash_partitioned'
+ORDER BY PARTITION_ORDINAL_POSITION;
