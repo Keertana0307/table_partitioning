@@ -1,4 +1,6 @@
 # Using Google Collab
+# Download the original Dataset first
+
 # Replace 'Order Date' with the exact column name
 df['Order Date'] = pd.to_datetime(df['Order Date'], errors='coerce')
 print(df['Order Date'].head())
