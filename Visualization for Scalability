@@ -1,0 +1,151 @@
+# Using Google Collab
+# Scalability Comparison
+# Hash Partitioning
+import matplotlib.pyplot as plt
+
+# Dataset sizes
+datasets = ['Small', 'Medium', 'Large']
+
+# Execution times or metric
+partitioned = [1.348235, 1.180255, 1.332584]
+non_partitioned = [2.108305, 1.898255, 1.550055]
+
+# Plot the lines
+plt.plot(datasets, partitioned, marker='o', label='Partitioned')
+plt.plot(datasets, non_partitioned, marker='o', label='Non-partitioned')
+
+# Add titles and labels
+plt.title('Scalability Comparison of Hash Partitioning')
+plt.xlabel('Dataset Size')
+plt.ylabel('Query Execution Time (second)')
+plt.grid(True)
+plt.legend()
+
+# Show the plot
+plt.show()
+
+
+# Range Partitioning
+import matplotlib.pyplot as plt
+
+# Dataset sizes
+datasets = ['Small', 'Medium', 'Large']
+
+# Execution times or metric
+partitioned = [0.424806, 0.218438, 0.273339]
+non_partitioned = [2.053715, 1.729241, 1.939176]
+
+# Plot the lines
+plt.plot(datasets, partitioned, marker='o', label='Partitioned')
+plt.plot(datasets, non_partitioned, marker='o', label='Non-partitioned')
+
+# Add titles and labels
+plt.title('Scalability Comparison of Range Partitioning')
+plt.xlabel('Dataset Size')
+plt.ylabel('Query Execution Time (second)')
+plt.grid(True)
+plt.legend()
+
+# Show the plot
+plt.show()
+
+
+# List Partitioning
+import matplotlib.pyplot as plt
+
+# Dataset sizes
+datasets = ['Small', 'Medium', 'Large']
+
+# Execution times or metric
+partitioned = [1.276578, 0.326678, 0.074331]
+non_partitioned = [3.508747, 1.197830, 0.272112]
+
+
+# Plot the lines
+plt.plot(datasets, partitioned, marker='o', label='Partitioned')
+plt.plot(datasets, non_partitioned, marker='o', label='Non-partitioned')
+
+# Add titles and labels
+plt.title('Scalability Comparison of Range Partitioning')
+plt.xlabel('Dataset Size')
+plt.ylabel('Query Execution Time (second)')
+plt.grid(True)
+plt.legend()
+
+# Show the plot
+plt.show()
+
+
+# Range with Hash Partitioning
+import matplotlib.pyplot as plt
+
+# Dataset sizes
+datasets = ['Small', 'Medium', 'Large']
+
+# Execution times or metric
+partitioned = [0.223273, 0.062075, 0.059957]
+non_partitioned = [3.820389, 0.573460, 0.098215]
+
+# Plot the lines
+plt.plot(datasets, partitioned, marker='o', label='Partitioned')
+plt.plot(datasets, non_partitioned, marker='o', label='Non-partitioned')
+
+# Add titles and labels
+plt.title('Scalability Comparison of Range Partitioning')
+plt.xlabel('Dataset Size')
+plt.ylabel('Query Execution Time (second)')
+plt.grid(True)
+plt.legend()
+
+# Show the plot
+plt.show()
+
+
+# Range with Key Partitioning
+import matplotlib.pyplot as plt
+
+# Dataset sizes
+datasets = ['Small', 'Medium', 'Large']
+
+# Execution times or metric
+partitioned = [0.442192, 0.513813, 0.580595]
+non_partitioned = [2.099344, 2.071543, 2.156047]
+
+# Plot the lines
+plt.plot(datasets, partitioned, marker='o', label='Partitioned')
+plt.plot(datasets, non_partitioned, marker='o', label='Non-partitioned')
+
+# Add titles and labels
+plt.title('Scalability Comparison of Range Partitioning')
+plt.xlabel('Dataset Size')
+plt.ylabel('Query Execution Time (second)')
+plt.grid(True)
+plt.legend()
+
+# Show the plot
+plt.show()
+
+
+# List with Key Partitioning
+import matplotlib.pyplot as plt
+
+# Dataset sizes
+datasets = ['Small', 'Medium', 'Large']
+
+# Execution times or metric
+partitioned = [0.226087, 0.055910, 0.057090]
+non_partitioned = [4.010642, 1.735415, 1.880712]
+
+# Plot the lines
+plt.plot(datasets, partitioned, marker='o', label='Partitioned')
+plt.plot(datasets, non_partitioned, marker='o', label='Non-partitioned')
+
+# Add titles and labels
+plt.title('Scalability Comparison of Range Partitioning')
+plt.xlabel('Dataset Size')
+plt.ylabel('Query Execution Time (second)')
+plt.grid(True)
+plt.legend()
+
+# Show the plot
+plt.show()
