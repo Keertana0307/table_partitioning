@@ -1,1 +1,57 @@
+CREATE TABLE sales_range_key_partitioned (
+	id BIGINT NOT NULL AUTO_INCREMENT,
+    Region VARCHAR(255),
+    Country VARCHAR(255),
+    Item_Type VARCHAR(255),
+    Sales_Channel VARCHAR(255),
+    Order_Priority CHAR(1),
+    Order_Date DATE,
+    Order_ID BIGINT,
+    Ship_Date DATE,
+    Units_Sold INT,
+    Unit_Price DECIMAL(10,2),
+    Unit_Cost DECIMAL(10,2),
+    Total_Revenue DECIMAL(15,2),
+    Total_Cost DECIMAL(15,2),
+    Total_Profit DECIMAL(15,2),
+	PRIMARY KEY (id, Order_Date, Region)
+)
+PARTITION BY RANGE (YEAR(Order_Date))
+SUBPARTITION BY KEY(Region)
+SUBPARTITIONS 7
+(
+    PARTITION p2021 VALUES LESS THAN (2022),
+    PARTITION p2022 VALUES LESS THAN (2023),
+    PARTITION p2023 VALUES LESS THAN (2024),
+    PARTITION pmax VALUES LESS THAN MAXVALUE
+);
 
+LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/sales_2021_2024.csv'
+INTO TABLE sales_range_key_partitioned
+FIELDS TERMINATED BY ','
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS
+(Region, Country, Item_Type, Sales_Channel, Order_Priority,
+ @Order_Date, Order_ID, @Ship_Date, Units_Sold,
+ Unit_Price, Unit_Cost, Total_Revenue, Total_Cost, Total_Profit)
+SET
+Order_Date = STR_TO_DATE(@Order_Date, '%Y-%m-%d'),
+Ship_Date  = STR_TO_DATE(@Ship_Date, '%Y-%m-%d');
+
+-- to view partitions of the table
+SELECT 
+    PARTITION_NAME,
+    SUBPARTITION_NAME,
+    PARTITION_ORDINAL_POSITION,
+    TABLE_ROWS
+FROM information_schema.PARTITIONS
+WHERE TABLE_SCHEMA = 'sales_database'
+  AND TABLE_NAME = 'sales_range_key_partitioned'
+ORDER BY PARTITION_ORDINAL_POSITION;
+
+-- to see how many rows of data exist in each year for each Region
+SELECT Region, YEAR(Order_Date) AS year, COUNT(*) AS total_rows
+FROM sales_range_key_partitioned
+GROUP BY year, Region
+ORDER BY year, Region;
