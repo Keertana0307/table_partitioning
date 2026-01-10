@@ -6,6 +6,8 @@
 
 This repository contains the data preparation using Google Collab, implementation of different table partitioning methods using MySQL, data storing and querying using MongoDB and visualization codes for scalability comparision across different partitioning methods using Google Collab.
 
+## Dataset Link:
+- https://www.kaggle.com/datasets/weitat/sample-sales
 
 ## Partitioning Methods using MySQL
 ### 1. Range Partitioning
